@@ -1,11 +1,14 @@
 # UCSDCSSA-MiniProgram
 WeChat mini program for UCSD CSSA
 
-## Setup
-* [微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
-No additional setup is needed. You can use your favorite text editor and use the IDE for testing only.
+## Setup & Dependencies
+* [nodejs](https://nodejs.org/)
+* `cd` into your home directory, then run `git clone` to download required file
+After that, run `cd UCSDCSSA-MiniProgram` then `npm install` to install npm packages
+* IDE [微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html) is required for testing.No additional setup is needed. You can use your favorite text editor and use the IDE for testing only.
 Backend funtionality using ExpressJS will be added in the future
 
 ## Acknowledgements
 * [Vant-WeApp](https://youzan.github.io/vant-weapp)
 99% of the UI will be directly from Vant WeApp library, 因为实在太好用了
+* [flightAwareXML](https://zh.flightaware.com/commercial/flightxml/documentation2.rvt) for flight info

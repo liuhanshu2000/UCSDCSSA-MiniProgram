@@ -1,5 +1,6 @@
 // pages/form/form.js
 import * as util from "/../../utils/util.js"
+import * as flight from "/../../utils/flightInfo.js"
 
 Page({
 
