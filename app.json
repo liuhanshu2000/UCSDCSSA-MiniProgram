@@ -1,0 +1,20 @@
+{
+  "pages":[
+    "pages/form/form",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "usingComponents": {
+    "van-button": "/dist/vant/button/index",
+    "van-field": "/dist/vant/field/index",
+    "van-cell":"/dist/vant/cell/index",
+    "van-row":"/dist/vant/row/index",
+    "van-col":"/dist/vant/row/index"
+  }
+}

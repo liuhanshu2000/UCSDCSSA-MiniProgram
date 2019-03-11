@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="color">
+  </view>
+  <view class="usermotto">
+    <van-button type="primary" bindtap='toForm'>
+    测试按钮
+    </van-button>
+  </view>
+</view>
