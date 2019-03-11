@@ -1,24 +1,23 @@
-var restclient = require('restler');
-var auth = require('./flightXMLAuth.json')
-
-const fxml_url = 'http://flightxml.flightaware.com/json/FlightXML2/';
-var username = auth.username;
-var apiKey = auth.APIKey;
-
-const getFlightInfo = (flightNumber, callback, err) => {
-    restclient.get(fxml_url + 'FlightInfoEx', {
-        username: username,
-        password: apiKey,
-        query: {ident:flightNumber,howMany: 1}
-    }).on('success', function(result, response) {
-        if(response.statusCode === 200){
-            callback(result.FlightInfoExResult.flights)
-        } else{
-            err(404, "Specified flight number not found")
-        }
-    });
-}
-
+var auth = require('flightXMLAuth')
+let username = auth.username;
+let apiKey = auth.APIKey;
+const fxml_url = `http://${username}:${apiKey}@flightxml.flightaware.com/json/FlightXML2/FlightInfoEx`;
 module.exports = {
-    getFlightInfo: getFlightInfo
+    getFlightInfo(flightNumber){
+        return new Promise((resolve, reject) => {
+            wx.request({
+                url: fxml_url, 
+                data: {
+                    ident:flightNumber, 
+                    howMany: 1
+                },
+                success({data: { FlightInfoExResult: { flights } }}){
+                    resolve(flights)
+                }, fail(err){
+                    reject(err)
+                }
+            })
+        })
+    }
 }
+

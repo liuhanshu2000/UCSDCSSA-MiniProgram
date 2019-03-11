@@ -1,0 +1,23 @@
+{
+  "name": "ucsdcssa-miniprogram",
+  "version": "1.0.0",
+  "description": "WeChat mini program for UCSD CSSA",
+  "main": "app.js",
+  "dependencies": {
+    "vant-weapp": "^0.5.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuhanshu2000/UCSDCSSA-MiniProgram.git"
+  },
+  "author": "weidadefanqie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liuhanshu2000/UCSDCSSA-MiniProgram/issues"
+  },
+  "homepage": "https://github.com/liuhanshu2000/UCSDCSSA-MiniProgram#readme"
+}

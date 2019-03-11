@@ -1,11 +1,9 @@
 <!--pages/form/form.wxml-->
 <van-col>
-  <van-row span="8">用户名</van-row>
-  <van-row span="8">密码</van-row>
   <van-row span="8">
    <van-field
     value="{{ value }}"
-    placeholder="请输入姓名"
+    placeholder="姓名"
     border="{{ false }}"
     bind:change="onChange"
   />

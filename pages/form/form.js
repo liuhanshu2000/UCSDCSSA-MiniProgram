@@ -2,6 +2,16 @@
 import * as util from "/../../utils/util.js"
 import * as flight from "/../../utils/flightInfo.js"
 
+//Debounce utility for
+const debounce = (fn, time) => {
+  let timeout;
+  return function() {
+    const functionCall = () => fn.apply(this, arguments); 
+    clearTimeout(timeout);
+    timeout = setTimeout(functionCall, time);
+  }
+}
+
 Page({
 
   /**
@@ -23,7 +33,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(util.isValidEmail('hi@hi.hi'))
+
   },
 
   /**

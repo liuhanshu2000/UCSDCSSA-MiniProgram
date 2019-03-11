@@ -11,10 +11,10 @@
     "navigationBarTextStyle":"black"
   },
   "usingComponents": {
-    "van-button": "/dist/vant/button/index",
-    "van-field": "/dist/vant/field/index",
-    "van-cell":"/dist/vant/cell/index",
-    "van-row":"/dist/vant/row/index",
-    "van-col":"/dist/vant/row/index"
+    "van-button": "/miniprogram_npm/vant-weapp/button/index",
+    "van-field": "/miniprogram_npm/vant-weapp/field/index",
+    "van-cell":"/miniprogram_npm/vant-weapp/cell/index",
+    "van-row":"/miniprogram_npm/vant-weapp/row/index",
+    "van-col":"/miniprogram_npm/vant-weapp/col/index"
   }
 }
