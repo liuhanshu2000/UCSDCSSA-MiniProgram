@@ -15,6 +15,9 @@
     "van-field": "/miniprogram_npm/vant-weapp/field/index",
     "van-cell":"/miniprogram_npm/vant-weapp/cell/index",
     "van-row":"/miniprogram_npm/vant-weapp/row/index",
-    "van-col":"/miniprogram_npm/vant-weapp/col/index"
+    "van-cell-group":"/miniprogram_npm/vant-weapp/cell-group/index",
+    "van-col":"/miniprogram_npm/vant-weapp/col/index",  
+    "van-datetime-picker": "/miniprogram_npm/vant-weapp/datetime-picker/index"  ,
+    "van-popup": "/miniprogram_npm/vant-weapp/popup/index"            
   }
 }
