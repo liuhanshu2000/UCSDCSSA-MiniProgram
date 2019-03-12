@@ -13,22 +13,56 @@ const debounce = (fn, time) => {
 }
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
+    showPopup: false,
     form:{
       name:'',
       phone:'',
       weChat:'',
-      date:'',
-      time:''
+      dateTime:new Date()
     }
   },
-  onChange(event){
-
+  onPopupClose(){
+    this.setData({['showPopup']:false})
   },
+
+  onPopupConfirm() {
+    //TODO: Set current data to 'time' cell
+  },
+
+  onClickPopup(){
+    this.setData({ ['showPopup']: true })
+  },
+
+  onFieldChange(event){
+    let that = this
+    switch(event.currentTarget.dataset.id){
+      //switch using type of field id
+      //then set respective data field
+      case "name":
+        that.setData({
+          ["form.name"]:event.detail
+        })
+        break
+      case "phone":
+        that.setData({
+          ["form.phone"]:event.detail
+        })
+        break
+      case "weChat":
+        that.setData({
+          ["form.weChat"]:event.detail
+        })
+        break
+      case "date":
+        //TODO: cast date into Date() object 
+        console.log(event.detail)
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

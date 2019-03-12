@@ -1,6 +1,85 @@
+@import '/pages/weui.wxss';
+
 /* pages/form/form.wxss */
+page {
+  background: #fafafa;
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.cell-group {
+  padding: 7px 0;
+}
+
+/**
+ * Tuples - Size
+ */
+.fw {
+  width: 100%;
+}
+
+.fvw {
+  width: 100vw;
+}
+
+.fh {
+  height: 100%;
+}
+
+.fvh {
+  height: 100vh;
+}
+
+/**
+ * Tuples - Flex
+ */
+
+.d-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.d-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.justify-content-start {
+  justify-content: start;
+}
+
+.justify-content-end {
+  justify-content: end;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+
+.align-items-start {
+  align-items: start;
+}
+
+.align-items-end {
+  align-items: end;
+}
+
+.align-items-center {
   align-items: center;
 }
