@@ -15,6 +15,9 @@
     <van-cell title="时间" value="点击选择时间" bind:tap="onClickPopup">
     </van-cell>
   </van-cell-group>
+  <van-cell-group custom-class="cell-group" border="{{false}}">
+    <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}"  />
+  </van-cell-group>
 </view>
 
 <van-popup show="{{ showPopup }}" 

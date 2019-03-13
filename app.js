@@ -16,6 +16,19 @@ App({
       }
     })
   },
+
+  requestGet(url, query) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: url,
+        data: query
+      }, res => {
+        resolve(res.data)
+      }, e => {
+        reject(e)
+      })
+    })
+  },
   
   globalData: {
     userInfo: null,

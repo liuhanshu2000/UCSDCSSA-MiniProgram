@@ -2,7 +2,7 @@
 import * as util from "/../../utils/util.js"
 import * as flight from "/../../utils/flightInfo.js"
 
-//Debounce utility for
+//Debounce utility
 const debounce = (fn, time) => {
   let timeout;
   return function() {
@@ -61,6 +61,23 @@ Page({
         //TODO: cast date into Date() object 
         console.log(event.detail)
     }
+  },
+
+  onFlightEnter({detail}){
+    //Test for invalid Flight number
+    /(\w){2}{\d}{1,}/g.test(detail) && (() => {
+      return;
+    });
+    flight.getFlightInfo(detail).then(res => {
+      !!res.error? ()=>{
+        //TODO: Exception Handling
+      }:()=>{
+        dateTime = new Date(res.FlightInfoExResult.flights[0].
+          estimatedarrivaltime)
+      }
+    }).catch(e => {
+      console.log(e)
+    })
   },
 
   /**
