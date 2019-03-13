@@ -2,33 +2,26 @@
 
 <view class="page__hd">
   <view class="page__title">新生接机报名表</view>
-  <view class="page__desc">Place holder description</view>
+  <view class="page__desc">Placeholder description</view>
 </view>
 
 <view class="body fw d-flex-column">
   <van-cell-group custom-class="cell-group" border="{{ false }}">
     <van-field placeholder="姓名" bind:change="onFieldChange" data-id="name" border="{{ true }}" />
     <van-field placeholder="电话" bind:change="onFieldChange" data-id="phone" border="{{ true }}" />
+    <van-field placeholder="微信号" bind:change="onFieldChange" data-id="weChat" border="{{ true }}" />
   </van-cell-group>
   <van-cell-group custom-class="cell-group" border="{{ false }}">
-    <van-field placeholder="微信号" bind:change="onFieldChange" data-id="weChat" border="{{ true }}" />
-    <van-cell title="时间" value="点击选择时间" bind:tap="onClickPopup">
+    <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}" />
+    <van-cell title="时间" value="{{timePickerText}}" bind:tap="onClickPopup">
     </van-cell>
   </van-cell-group>
   <van-cell-group custom-class="cell-group" border="{{false}}">
-    <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}"  />
   </van-cell-group>
 </view>
 
-<van-popup show="{{ showPopup }}" 
-position="bottom" 
-mask="{{ true }}" 
-bind:close="onPopupClose"
->
-  <van-datetime-picker type="datetime" 
-  value="{{ currentDate }}"     
-  data-id="date"
-  bind:change="onFieldChange"
-  bind:cancel="onPopupClose" 
-  bind:confirm="onPopupConfirm" />
+<!-- <van-popup show="{{showFlightInfo}}" position=> -->
+
+<van-popup show="{{ showPopup }}" position="bottom" mask="{{ true }}" bind:close="onPopupClose">
+  <van-datetime-picker type="datetime" value="{{ flightTime.getTime() }}" data-id="date"     bind:cancel="onPopupClose" bind:confirm="onPopupConfirm" />
 </van-popup>

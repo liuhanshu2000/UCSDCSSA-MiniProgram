@@ -6,7 +6,7 @@ import * as flight from "/../../utils/flightInfo.js"
 const debounce = (fn, time) => {
   let timeout;
   return function() {
-    const functionCall = () => fn.apply(this, arguments); 
+    const functionCall = () => fn.apply(this, arguments);
     clearTimeout(timeout);
     timeout = setTimeout(functionCall, time);
   }
@@ -18,121 +18,132 @@ Page({
    */
   data: {
     showPopup: false,
-    form:{
-      name:'',
-      phone:'',
-      weChat:'',
-      dateTime:new Date()
+    timePickerText:"点击选择时间",
+    form: {
+      name: '',
+      phone: '',
+      weChat: '',
+      flightInfo:{},
+      flightTime: Date.now(),
+      dateTime: new Date(),
     }
   },
-  onPopupClose(){
-    this.setData({['showPopup']:false})
+  onPopupClose() {
+    this.setData({
+      ['showPopup']: false
+    })
   },
 
-  onPopupConfirm() {
-    //TODO: Set current data to 'time' cell
+  onPopupConfirm(event) {
+    this.setData({['form.dateTime']:new Date(event.detail)})
+    this.setData({ ['timePickerText']: this.data.form.dateTime.toString()})
+    this.onPopupClose()
   },
 
-  onClickPopup(){
-    this.setData({ ['showPopup']: true })
+  onClickPopup() {
+    this.setData({
+      ['showPopup']: true
+    })
   },
 
-  onFieldChange(event){
+  onFieldChange(event) {
     let that = this
-    switch(event.currentTarget.dataset.id){
+    switch (event.currentTarget.dataset.id) {
       //switch using type of field id
       //then set respective data field
       case "name":
         that.setData({
-          ["form.name"]:event.detail
+          ["form.name"]: event.detail
         })
         break
       case "phone":
         that.setData({
-          ["form.phone"]:event.detail
+          ["form.phone"]: event.detail
         })
         break
       case "weChat":
         that.setData({
-          ["form.weChat"]:event.detail
+          ["form.weChat"]: event.detail
         })
-        break
-      case "date":
-        //TODO: cast date into Date() object 
-        console.log(event.detail)
+        break        
     }
   },
 
-  onFlightEnter({detail}){
-    //Test for invalid Flight number
-    /(\w){2}{\d}{1,}/g.test(detail) && (() => {
+  onFlightEnter({detail}) {
+    if (!(/(\w){2}(\d){1,}/g.test(detail))){
       return;
-    });
+    }
+    let that = this
     flight.getFlightInfo(detail).then(res => {
-      !!res.error? ()=>{
-        //TODO: Exception Handling
-      }:()=>{
-        dateTime = new Date(res.FlightInfoExResult.flights[0].
-          estimatedarrivaltime)
+      if (res.hasOwnProperty('error')){
+        //No response from server
+        that.setData({['form.flightTime']: new Date(0)})
+      } else {
+        let eta = res.FlightInfoExResult.flights[0].estimatedarrivaltime
+        that.setData({['form.flightInfo']: res.FlightInfoExResult.flights[0]})
+          //TODO: Timezone correction, UTC to PDT
+        that.setData({['form.flightTime']: new Date(eta*1000)})
+        that.setData({['timePickerText']:that.data.form.flightTime.toString()})
       }
     }).catch(e => {
-      console.log(e)
+      //TODO: Network Error
+      console.error(e)
     })
   },
 
-  /**
+  /** 
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     this.onLoad()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

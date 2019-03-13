@@ -8,7 +8,7 @@ App({
           /iphone11/i.test(res.model);
       },
     })
-    console.log(that.globalData.isiPhoneX)
+    // console.log(that.globalData.isiPhoneX)
     // 登录
     wx.login({
       success: res => {
@@ -22,11 +22,9 @@ App({
       wx.request({
         url: url,
         data: query
-      }, res => {
+      , success(res){
         resolve(res.data)
-      }, e => {
-        reject(e)
-      })
+      }})
     })
   },
   

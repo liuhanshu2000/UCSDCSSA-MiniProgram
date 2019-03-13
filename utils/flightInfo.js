@@ -9,25 +9,9 @@ module.exports = {
           app.requestGet(fxml_url, {
             ident: flightNumber,
             howMany: 1
+          }).then(res => {
+            resolve(res)
           })
-            // wx.request({
-            //     url: fxml_url, 
-            //     data: {
-            //         ident:flightNumber, 
-            //         howMany: 1
-            //     },
-            //     success({ data }){
-            //         !!data.error ? () =>{
-            //           resolve({error: "Error getting flight info"})
-            //         } : () => {
-            //           let { FlightInfoExResult: { flights } }= data;
-            //           resolve(flights);
-            //         }
-            //     }, fail(err){
-            //       //TODO: Reject on network error
-            //         reject(err)
-            //     }
-            // })
         })
     }
 }
