@@ -17,6 +17,9 @@ App({
     })
   },
 
+  /**
+   * Encapsulate wx.request()
+   */
   requestGet(url, query) {
     return new Promise((resolve, reject) => {
       wx.request({

@@ -1,6 +1,9 @@
 // pages/form/form.js
-import * as util from "/../../utils/util.js"
-import * as flight from "/../../utils/flightInfo.js"
+let auth = require('flightXMLAuth')
+let app = getApp()
+let username = auth.username;
+let apiKey = auth.APIKey;
+const fxml_url = `http://${username}:${apiKey}@flightxml.flightaware.com/json/FlightXML2/FlightInfoEx`;
 
 //Debounce utility
 const debounce = (fn, time) => {
@@ -19,15 +22,24 @@ Page({
   data: {
     showPopup: false,
     timePickerText:"点击选择时间",
+    valid:{
+      phone:true,
+      usPhone:true,
+      email:true,
+      flightNum: true
+    },
     form: {
       name: '',
       phone: '',
+      usPhone:'',
       weChat: '',
+      email:'',
       flightInfo:{},
       flightTime: Date.now(),
-      dateTime: new Date(),
+      dateTime: new Date()
     }
   },
+
   onPopupClose() {
     this.setData({
       ['showPopup']: false
@@ -58,23 +70,38 @@ Page({
         break
       case "phone":
         that.setData({
-          ["form.phone"]: event.detail
+          ["form.phone"]: event.detail,
+          ["valid.phone"]:this.isValidPhone(event.detail)
         })
         break
       case "weChat":
         that.setData({
           ["form.weChat"]: event.detail
         })
-        break        
+        break  
+      case "usPhone":
+        that.setData({
+          ["form.usPhone"]: event.detail,
+          ["valid.usPhone"]: this.isValidUSPhone(event.detail)
+        })  
+        break    
+      case "email":
+        that.setData({
+          ["form.email"]:event.detail,
+          ["valid.email"]:this.isValidEmail(event.detail)
+        })
+        break
     }
   },
 
   onFlightEnter({detail}) {
+    let that = this
     if (!(/(\w){2}(\d){1,}/g.test(detail))){
+      that.setData({["valid.flightNum"]:false})
       return;
     }
-    let that = this
-    flight.getFlightInfo(detail).then(res => {
+    that.setData({ ["valid.flightNum"]: true })
+    this.getFlightInfo(detail).then(res => {
       if (res.hasOwnProperty('error')){
         //No response from server
         that.setData({['form.flightTime']: new Date(0)})
@@ -89,6 +116,32 @@ Page({
       //TODO: Network Error
       console.error(e)
     })
+  },
+  /**
+   * Get flight information from
+   * flightXML APi
+   */
+  getFlightInfo: function (flightNumer) {
+    return new Promise((resolve, reject) => {
+      app.requestGet(fxml_url, {
+        ident: flightNumer,
+        howMany: 1
+      }).then(res => {
+        resolve(res)
+      })
+    })
+  },
+
+  isValidPhone: function(num){
+    return /1[34578]\d{9}/.test(num)
+  },
+
+  isValidUSPhone: function(num){
+    return /\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})/.test(num)
+  },
+
+  isValidEmail: function(email){
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]      {1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
   },
 
   /** 
@@ -146,4 +199,5 @@ Page({
   onShareAppMessage: function() {
 
   }
+
 })

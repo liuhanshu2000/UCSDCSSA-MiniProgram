@@ -2,21 +2,25 @@
 
 <view class="page__hd">
   <view class="page__title">新生接机报名表</view>
-  <view class="page__desc">Placeholder description</view>
+  <view class="page__desc">亲爱的UCSD 2023ers你们好！感谢你对CSSA的支持与信任，CSSA期待与你相见</view>
 </view>
+
 
 <view class="body fw d-flex-column">
   <van-cell-group custom-class="cell-group" border="{{ false }}">
     <van-field placeholder="姓名" bind:change="onFieldChange" data-id="name" border="{{ true }}" />
-    <van-field placeholder="电话" bind:change="onFieldChange" data-id="phone" border="{{ true }}" />
+    <van-field placeholder="电话" bind:change="onFieldChange" data-id="phone" border="{{ true }}" error="{{!valid.phone}}" />
+    <van-field placeholder="美国电话(如有)" bind:change="onFieldChange" data-id="usPhone"
+    border="{{true}}" error="{{!valid.usPhone}}"  />
     <van-field placeholder="微信号" bind:change="onFieldChange" data-id="weChat" border="{{ true }}" />
+    <van-field placeholder="邮箱" bind:change="onFieldChange" data-id="email" border="{{true}}"
+    error="{{!valid.email}}" />
   </van-cell-group>
   <van-cell-group custom-class="cell-group" border="{{ false }}">
-    <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}" />
+    <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}" 
+    error="{{!valid.flightNum}}"/>
     <van-cell title="时间" value="{{timePickerText}}" bind:tap="onClickPopup">
-    </van-cell>
-  </van-cell-group>
-  <van-cell-group custom-class="cell-group" border="{{false}}">
+  </van-cell>
   </van-cell-group>
 </view>
 
