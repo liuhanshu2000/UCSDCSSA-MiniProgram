@@ -28,6 +28,15 @@ Page({
       email:true,
       flightNum: true
     },
+    visible:{
+      flightInfo: true,
+
+    },
+    radio: {
+      simCard: false,
+      bankCard: false,
+      pickUp: false
+    },
     form: {
       name: '',
       phone: '',
@@ -44,6 +53,22 @@ Page({
     this.setData({
       ['showPopup']: false
     })
+  },
+
+  onSelect(event){
+    console.log(event)
+    switch(event.currentTarget.dataset.name){
+      case "pickUp":{
+
+        break;
+      }
+      case "bankCard":{
+        break
+      }
+      case "simCard":{
+        break
+      }
+    }
   },
 
   onPopupConfirm(event) {
@@ -108,7 +133,6 @@ Page({
       } else {
         let eta = res.FlightInfoExResult.flights[0].estimatedarrivaltime
         that.setData({['form.flightInfo']: res.FlightInfoExResult.flights[0]})
-          //TODO: Timezone correction, UTC to PDT
         that.setData({['form.flightTime']: new Date(eta*1000)})
         that.setData({['timePickerText']:that.data.form.flightTime.toString()})
       }
@@ -116,6 +140,16 @@ Page({
       //TODO: Network Error
       console.error(e)
     })
+  },
+  
+  onSubmit: function(event){
+    for(let i in this.data.valid){
+      if(!i){
+        return
+      }
+    }
+    let data = this.data.form
+    console.log("Submitted")
   },
   /**
    * Get flight information from

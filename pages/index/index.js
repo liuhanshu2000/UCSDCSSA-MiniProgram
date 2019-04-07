@@ -9,6 +9,12 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
+  toForm: function() {
+    wx.navigateTo({
+      url: '../form/form',
+    })
+  },
+  
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({

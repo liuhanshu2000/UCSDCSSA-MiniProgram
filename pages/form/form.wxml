@@ -5,8 +5,8 @@
   <view class="page__desc">亲爱的UCSD 2023ers你们好！感谢你对CSSA的支持与信任，CSSA期待与你相见</view>
 </view>
 
-
 <view class="body fw d-flex-column">
+  <!-- Basic Info-->
   <van-cell-group custom-class="cell-group" border="{{ false }}">
     <van-field placeholder="姓名" bind:change="onFieldChange" data-id="name" border="{{ true }}" />
     <van-field placeholder="电话" bind:change="onFieldChange" data-id="phone" border="{{ true }}" error="{{!valid.phone}}" />
@@ -16,12 +16,28 @@
     <van-field placeholder="邮箱" bind:change="onFieldChange" data-id="email" border="{{true}}"
     error="{{!valid.email}}" />
   </van-cell-group>
+  <!-- Selector -->
+  <van-radio-group value="{{ radio }}" bind:change="onChange">
+    <van-cell-group>
+      <van-cell title="新生街机" clickable data-name="pickUp" bind:click="onSelect">
+        <van-radio checked-color="#992f2d" name="pickUp" />
+      </van-cell>
+      <van-cell title="银行卡" clickable data-name="bankCard" bind:click="onSelect">
+        <van-radio checked-color="#992f2d" name="bankCard" />
+      </van-cell>
+      <van-cell title="手机卡" clickable data-name="simCard" bind:click="onSelect">
+        <van-radio checked-color="#992f2d" name="simCard" />
+      </van-cell>
+    </van-cell-group>
+  </van-radio-group>
+  <!-- Flight Info-->
   <van-cell-group custom-class="cell-group" border="{{ false }}">
     <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}" 
     error="{{!valid.flightNum}}"/>
-    <van-cell title="时间" value="{{timePickerText}}" bind:tap="onClickPopup">
-  </van-cell>
+    <van-cell title="时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
   </van-cell-group>
+  <!-- Submit Button -->
+  <van-button square type="primary" size="large" bind:click="onSubmit">提交</van-button>
 </view>
 
 <!-- <van-popup show="{{showFlightInfo}}" position=> -->
