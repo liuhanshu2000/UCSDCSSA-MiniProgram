@@ -22,11 +22,6 @@ Page({
     })
   },
   
-  toForm: function(){
-    wx.navigateTo({
-      url: '../form/form'
-    })
-  },
   onLoad() {
     if (app.globalData.userInfo) {
       this.setData({
