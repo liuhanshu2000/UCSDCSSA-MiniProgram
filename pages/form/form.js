@@ -23,10 +23,9 @@ Page({
     showPopup: false,
     timePickerText:"点击选择时间",
     valid:{
-      phone:true,
-      usPhone:true,
-      email:true,
-      flightNum: true
+      phone:false,
+      email:false,
+      flightNum: false
     },
     visible:{
       flightInfo: true,
@@ -117,6 +116,7 @@ Page({
         })
         break
     }
+    
   },
 
   onFlightEnter({detail}) {
@@ -143,8 +143,9 @@ Page({
   },
   
   onSubmit: function(event){
-    for(let i in this.data.valid){
-      if(!i){
+    for(let k in this.data.valid){
+      if (!this.data.valid[k]){
+        console.log("There is Invalid Input")
         return
       }
     }
