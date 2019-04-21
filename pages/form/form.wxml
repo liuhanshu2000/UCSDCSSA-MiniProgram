@@ -19,7 +19,7 @@
   <!-- Selector -->
   <van-radio-group value="{{ radio }}" bind:change="onChange">
     <van-cell-group>
-      <van-cell title="新生接机" clickable data-name="pickUp" bind:click="onSelect">
+      <van-cell title="新生街机" clickable data-name="pickUp" bind:click="onSelect">
         <van-radio checked-color="#992f2d" name="pickUp" />
       </van-cell>
       <van-cell title="银行卡" clickable data-name="bankCard" bind:click="onSelect">
