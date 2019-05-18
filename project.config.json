@@ -9,8 +9,7 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false,
-		"nodemodoul": true
+		"autoAudits": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
