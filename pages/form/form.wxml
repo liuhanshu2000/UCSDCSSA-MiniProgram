@@ -2,34 +2,35 @@
 
 <view class="page__hd">
   <view class="page__title">新生接机报名表</view>
-  <view class="page__desc">亲爱的UCSD 2023ers你们好！感谢你对CSSA的支持与信任，CSSA期待与你相见</view>
+  <view class="page__desc">亲爱的UCSD 2023ers你们好！是不是已经开始憧憬你们的大学生活了呢？我们也已经准备好一切迎接你们的到来了！请选择你想报名的服务，报名成功后，我们会以邮件或者微信的形式与你联系。感谢你对CSSA的支持与信任，CSSA期待与你相见</view>
 </view>
 
 <view class="body fw d-flex-column">
   <!-- Basic Info-->
   <van-cell-group custom-class="cell-group" border="{{ false }}">
-    <van-field placeholder="姓名" bind:change="onFieldChange" data-id="name" border="{{ true }}" />
-    <van-field placeholder="电话" bind:change="onFieldChange" data-id="phone" border="{{ true }}" error="{{!valid.phone}}" />
+    <van-field placeholder="姓名" required bind:change="onFieldChange" data-id="name" border="{{ true }}" />
+    <van-field placeholder="国内电话" required bind:change="onFieldChange" data-id="phone" border="{{ true }}" error="{{!valid.phone}}" />
     <van-field placeholder="美国电话(如有)" bind:change="onFieldChange" data-id="usPhone"
     border="{{true}}" error="{{!valid.usPhone}}"  />
-    <van-field placeholder="微信号" bind:change="onFieldChange" data-id="weChat" border="{{ true }}" />
-    <van-field placeholder="邮箱" bind:change="onFieldChange" data-id="email" border="{{true}}"
+    <van-field placeholder="邮箱" required bind:change="onFieldChange" data-id="email" border="{{true}}"
     error="{{!valid.email}}" />
+    <van-field placeholder="微信号" required bind:change="onFieldChange" data-id="weChat" border="{{ true }}" />
+    <van-field placeholder="家长联系方式(手机号/微信/QQ)" required bind:change="onFieldChange" data-id="parentContact" border="{{ true }}" />
   </van-cell-group>
   <!-- Selector -->
-  <van-radio-group value="{{ radio }}" bind:change="onChange">
+  <van-checkbox-group value="{{ planResult }}" bind:change="onChange">
     <van-cell-group>
-      <van-cell title="新生街机" clickable data-name="pickUp" bind:click="onSelect">
-        <van-radio checked-color="#992f2d" name="pickUp" />
-      </van-cell>
-      <van-cell title="银行卡" clickable data-name="bankCard" bind:click="onSelect">
-        <van-radio checked-color="#992f2d" name="bankCard" />
-      </van-cell>
-      <van-cell title="手机卡" clickable data-name="simCard" bind:click="onSelect">
-        <van-radio checked-color="#992f2d" name="simCard" />
+      <van-cell  
+        wx:for="{{ planData }}"
+        wx:key="index"
+        title="{{ planName[index] }}"
+        clickable 
+        data-name="{{ item }}" 
+        bind:click="toggle">
+        <van-checkbox name="{{ item }}" catch:tap="noop" class="checkboxes-{{ item }}" checked-color="#992f2d"/>
       </van-cell>
     </van-cell-group>
-  </van-radio-group>
+  </van-checkbox-group>
   <!-- Flight Info-->
   <van-cell-group custom-class="cell-group" border="{{ false }}">
     <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}" 

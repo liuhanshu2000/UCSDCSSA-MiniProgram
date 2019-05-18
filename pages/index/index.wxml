@@ -5,6 +5,8 @@
 
 <view class="body fw d-flex-column">
 
-  <van-button round type="primary" size="large" bind:click="toForm">TEST</van-button>
+  <van-button round type="primary" size="large" bind:click="toForm">接机报名</van-button>
+
+  <van-button round type="secondary" size="large" bind:click="toResult">结果查看</van-button>
 </view>
 

@@ -30,13 +30,14 @@ Page({
     },
     visible:{
       flightInfo: true,
-
     },
-    radio: {
-      simCard: false,
-      bankCard: false,
-      pickUp: false
-    },
+    planData: [
+      'simCard', 'bankCard', 'pickUp',
+    ],
+    planName: [
+      '手机卡', '银行卡', '新生接机',
+    ],
+    planResult: [],
     form: {
       name: '',
       phone: '',
@@ -45,7 +46,7 @@ Page({
       email:'',
       flightInfo:{},
       flightTime: Date.now(),
-      dateTime: new Date()
+      dateTime: new Date(0)
     }
   },
 
@@ -54,23 +55,24 @@ Page({
       ['showPopup']: false
     })
   },
-
-  onSelect(event){
-    console.log(event)
-    switch(event.currentTarget.dataset.name){
-      case "pickUp":{
-
-        break;
-      }
-      case "bankCard":{
-        break
-      }
-      case "simCard":{
-        break
-      }
-    }
+  /**
+   * this function handles checkbox toggle events
+   */
+  onChange(event) {
+    const { name } = event.currentTarget.dataset;
+    this.setData({
+      planResult: event.detail,
+    })
   },
-
+  /**
+   * this function handles checkbox cell click events
+   */
+  toggle(event) {
+    const { name } = event.currentTarget.dataset;
+    const checkbox = this.selectComponent(`.checkboxes-${name}`);
+    checkbox.toggle();
+  },
+  noop() {},
   onPopupConfirm(event) {
     this.setData({['form.dateTime']:new Date(event.detail)})
     this.setData({ ['timePickerText']: this.data.form.dateTime.toString()})
@@ -149,7 +151,7 @@ Page({
       }
     }
     let data = this.data.form
-    console.log("Submitted")
+    console.log("Submitted " + JSON.stringify(data))
   },
   /**
    * Get flight information from

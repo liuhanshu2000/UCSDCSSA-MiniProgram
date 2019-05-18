@@ -14,7 +14,11 @@ Page({
       url: '../form/form',
     })
   },
-  
+  toResult: function () {
+    wx.navigateTo({
+      url: '../result/result',
+    })
+  },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
