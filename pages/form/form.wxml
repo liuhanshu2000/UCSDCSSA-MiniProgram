@@ -36,7 +36,7 @@
     </van-cell-group>
   </van-checkbox-group>
   <!-- Flight Info-->
-  <van-cell-group custom-class="cell-group" border="{{ false }}" class="flight-info-container">
+  <van-cell-group custom-class="cell-group" border="{{ false }}" class="flight-info-container" wx:if="{{flightStatus}}">
     <view class="title-group">接机服务信息</view>
     <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}" 
     error="{{!valid.flightNum}}"/>
@@ -47,7 +47,7 @@
   </van-cell-group>
 
   <!-- House Info-->
-  <van-cell-group custom-class="cell-group" border="{{ false }}" class="house-info-container">
+  <van-cell-group custom-class="cell-group" border="{{ false }}" class="house-info-container" wx:if="{{hotelStatus}}">
     <view class="title-group">酒店住宿信息</view>
     <van-cell title="开始入住时间" value="{{houseEnterTimeText}}" bind:tap="onHouseEnterClickPopup" />
     <van-cell title="住宿最后时间" value="{{houseEndTimeText}}" bind:tap="onHouseEndClickPopup" />
@@ -64,7 +64,7 @@
   </van-cell-group>
 
     <!-- Bus Info-->
-  <van-cell-group custom-class="cell-group" border="{{ false }}" class="house-info-container">
+  <van-cell-group custom-class="cell-group" border="{{ false }}" class="house-info-container" wx:if="{{busStatus}}">
     <view class="title-group">大巴接机服务信息</view>
     <van-cell title="机票是否通过悦禾订票">
       <van-switch checked="{{isTicketFrom}}" active-color="#992f2d" bind:change="onTicketChange"/>
@@ -72,7 +72,7 @@
   </van-cell-group>
 
   <!-- Host Family Info-->
-  <van-cell-group title="分组1" border="{{ false }}" class="house-info-container">
+  <van-cell-group title="分组1" border="{{ false }}" class="house-info-container" wx:if="{{hostStatus}}">
     <view class="title-group">寄宿家庭（最多三天）信息</view>
     <van-cell title="开始入住时间" value="{{hostEnterTimeText}}" bind:tap="onHostEnterClickPopup" />
     <van-cell title="住宿最后时间" value="{{hostEndTimeText}}" bind:tap="onHostEndClickPopup" />

@@ -33,6 +33,10 @@ Page({
     hostEnterTimeText:"点击选择时间",
     hostEndTimeText:"点击选择时间",
     cityText:"点击选择城市",
+    flightStatus: false,
+    hotelStatus: false,
+    busStatus: false,
+    hostStatus: false,
     isSharingRoom: false,
     isTicketFrom: false,
     valid:{
@@ -63,7 +67,7 @@ Page({
       hostEnterTime: Date.now(),
       hostEndTime: Date.now(),
       dateTime: new Date(0),
-      cityCode: 0
+      city: []
     },
     minDate: new Date().getTime(),
     endMinDate: new Date().getTime(),
@@ -73,7 +77,6 @@ Page({
    * this function handles checkbox toggle events
    */
   onChange(event) {
-    const { name } = event.currentTarget.dataset;
     this.setData({
       planResult: event.detail,
     })
@@ -84,6 +87,20 @@ Page({
   toggle(event) {
     const { name } = event.currentTarget.dataset;
     const checkbox = this.selectComponent(`.checkboxes-${name}`);
+    switch (name) {
+      case 'carPickUp':
+        this.setData({flightStatus: !this.data.flightStatus});
+        break;
+      case 'house':
+        this.setData({hotelStatus: !this.data.hotelStatus});
+        break;
+      case 'busPickUp':
+          this.setData({busStatus: !this.data.busStatus});
+          break;
+      case 'hostFamily':
+          this.setData({hostStatus: !this.data.hostStatus});
+          break;
+    }
     checkbox.toggle();
   },
   noop() {},
@@ -93,7 +110,6 @@ Page({
     })
   },
   onCityPopupConfirm(event) {
-    console.log(event.detail);
     this.setData({['form.city']:event.detail.values});
     this.setData({ ['cityText']: this.data.form.city[0].name + '/' + this.data.form.city[1].name + '/' + this.data.form.city[2].name})
     this.onCityPopupClose();
@@ -248,6 +264,7 @@ Page({
   },
   
   onSubmit: function(event){
+    console.log(this.data.form)
     for(let k in this.data.valid){
       if (!this.data.valid[k]){
         console.log("There is Invalid Input")
