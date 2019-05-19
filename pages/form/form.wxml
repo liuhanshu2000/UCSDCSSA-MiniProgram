@@ -12,7 +12,7 @@
     <van-field placeholder="姓名" required bind:change="onFieldChange" data-id="name" border="{{ true }}" />
     <van-field placeholder="国内电话" required bind:change="onFieldChange" data-id="phone" border="{{ true }}" error="{{!valid.phone}}" />
     <van-field placeholder="美国电话(如有)" bind:change="onFieldChange" data-id="usPhone"
-    border="{{true}}" error="{{!valid.usPhone}}"  />
+    border="{{true}}" />
     <van-field placeholder="邮箱" required bind:change="onFieldChange" data-id="email" border="{{true}}"
     error="{{!valid.email}}" />
     <van-field placeholder="微信号" required bind:change="onFieldChange" data-id="weChat" border="{{ true }}" />
