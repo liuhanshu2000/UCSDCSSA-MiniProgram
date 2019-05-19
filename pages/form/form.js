@@ -42,7 +42,7 @@ Page({
     empty:{ 
       phone: true,
       email:true,
-      fl
+      flightNum: true
     },
     valid:{
       phone:true,
