@@ -39,10 +39,15 @@ Page({
     hostStatus: false,
     isSharingRoom: false,
     isTicketFrom: false,
+    empty:{ 
+      phone: true,
+      email:true,
+      fl
+    },
     valid:{
-      phone:false,
-      email:false,
-      flightNum: false
+      phone:true,
+      email:true,
+      flightNum: true //航班号valid
     },
     visible:{
       flightInfo: true,
@@ -62,7 +67,7 @@ Page({
       email:'',
       flightInfo:{},
       flightTime: Date.now(),
-      flightNum: 0,
+      flightNum: 0, //接机人数
       hotelNum: 0,
       hotelRoomNum: 0,
       houseEnterTime: Date.now(),
@@ -99,23 +104,22 @@ Page({
   toggle(event) {
     const { name } = event.currentTarget.dataset;
     const checkbox = this.selectComponent(`.checkboxes-${name}`);
+    checkbox.toggle();
     switch (name) {
       case 'carPickUp':
-        this.setData({flightStatus: !this.data.flightStatus});
+        this.setData({ flightStatus: !this.data.flightStatus });
         break;
       case 'house':
-        this.setData({hotelStatus: !this.data.hotelStatus});
+        this.setData({ hotelStatus: !this.data.hotelStatus });
         break;
       case 'busPickUp':
-          this.setData({busStatus: !this.data.busStatus});
-          break;
+        this.setData({ busStatus: !this.data.busStatus });
+        break;
       case 'hostFamily':
-          this.setData({hostStatus: !this.data.hostStatus});
-          break;
+        this.setData({ hostStatus: !this.data.hostStatus });
+        break;
     }
-    checkbox.toggle();
   },
-  noop() {},
   onCityClickPopup() {
     this.setData({
       ['showCityPopup']: true
