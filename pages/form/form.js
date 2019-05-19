@@ -4,7 +4,7 @@ let app = getApp()
 let username = auth.username;
 let apiKey = auth.APIKey;
 const fxml_url = `http://${username}:${apiKey}@flightxml.flightaware.com/json/FlightXML2/FlightInfoEx`;
-
+import areaList from "./area.js";
 //Debounce utility
 const debounce = (fn, time) => {
   let timeout;
@@ -20,23 +20,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showPopup: false,
-    timePickerText:"点击选择时间",
+    areaList: areaList,
+    showCityPopup: false,
+    showFlightPopup: false,
+    showHouseEnterPopup: false,
+    showHouseEndPopup: false,
+    showHostEnterPopup: false,
+    showHostEndPopup: false,
+    flightTimeText:"点击选择时间",
+    houseEnterTimeText:"点击选择时间",
+    houseEndTimeText:"点击选择时间",
+    hostEnterTimeText:"点击选择时间",
+    hostEndTimeText:"点击选择时间",
+    cityText:"点击选择城市",
+    flightStatus: false,
+    hotelStatus: false,
+    busStatus: false,
+    hostStatus: false,
+    isSharingRoom: false,
+    isTicketFrom: false,
     valid:{
-      phone:true,
-      usPhone:true,
-      email:true,
-      flightNum: true
+      phone:false,
+      email:false,
+      flightNum: false
     },
     visible:{
       flightInfo: true,
-
     },
-    radio: {
-      simCard: false,
-      bankCard: false,
-      pickUp: false
-    },
+    planData: [
+      'simCard', 'bankCard', 'carPickUp', 'busPickUp', 'house', 'hostFamily'
+    ],
+    planName: [
+      '手机卡代办', '银行卡代办', 'LA轿车接机', 'LA大巴接机','酒店住宿', '寄宿家庭'
+    ],
+    planResult: [],
     form: {
       name: '',
       phone: '',
@@ -45,44 +62,159 @@ Page({
       email:'',
       flightInfo:{},
       flightTime: Date.now(),
-      dateTime: new Date()
-    }
+      flightNum: 0,
+      hotelNum: 0,
+      hotelRoomNum: 0,
+      houseEnterTime: Date.now(),
+      houseEndTime: Date.now(),
+      hostEnterTime: Date.now(),
+      hostEndTime: Date.now(),
+      dateTime: new Date(0),
+      city: [],
+    },
+    minDate: new Date().getTime(),
+    endMinDate: new Date().getTime(),
   },
 
-  onPopupClose() {
+  /**
+   * this function handles checkbox toggle events
+   */
+  onCheckChange(event) {
     this.setData({
-      ['showPopup']: false
+      planResult: event.detail,
     })
   },
-
-  onSelect(event){
-    console.log(event)
-    switch(event.currentTarget.dataset.name){
-      case "pickUp":{
-
+  onFlightNumChange(event) {
+    this.setData({['form.flightNum']: event.detail})
+  },
+  onHotelNumChange(event) {
+    this.setData({['form.hotelNum']: event.detail})
+  },
+  onHotelRoomNumChange(event) {
+    this.setData({['form.hotelRoomNum']: event.detail})
+  },
+  /**
+   * this function handles checkbox cell click events
+   */
+  toggle(event) {
+    const { name } = event.currentTarget.dataset;
+    const checkbox = this.selectComponent(`.checkboxes-${name}`);
+    switch (name) {
+      case 'carPickUp':
+        this.setData({flightStatus: !this.data.flightStatus});
         break;
-      }
-      case "bankCard":{
-        break
-      }
-      case "simCard":{
-        break
-      }
+      case 'house':
+        this.setData({hotelStatus: !this.data.hotelStatus});
+        break;
+      case 'busPickUp':
+          this.setData({busStatus: !this.data.busStatus});
+          break;
+      case 'hostFamily':
+          this.setData({hostStatus: !this.data.hostStatus});
+          break;
     }
+    checkbox.toggle();
   },
-
-  onPopupConfirm(event) {
-    this.setData({['form.dateTime']:new Date(event.detail)})
-    this.setData({ ['timePickerText']: this.data.form.dateTime.toString()})
-    this.onPopupClose()
-  },
-
-  onClickPopup() {
+  noop() {},
+  onCityClickPopup() {
     this.setData({
-      ['showPopup']: true
+      ['showCityPopup']: true
+    })
+  },
+  onCityPopupConfirm(event) {
+    this.setData({['form.city']:event.detail.values});
+    this.setData({ ['cityText']: this.data.form.city[0].name + '/' + this.data.form.city[1].name + '/' + this.data.form.city[2].name})
+    this.onCityPopupClose();
+  },
+  onCityPopupClose() {
+    this.setData({
+      ['showCityPopup']: false
+    })
+  },
+  onFlightClickPopup() {
+    this.setData({
+      ['showFlightPopup']: true
+    })
+  },
+  onFlightPopupConfirm(event) {
+    this.setData({['form.dateTime']:new Date(event.detail)})
+    this.setData({ ['flightTimeText']: this.data.form.dateTime.toString()})
+    this.onFlightPopupClose();
+  },
+  onFlightPopupClose() {
+    this.setData({
+      ['showFlightPopup']: false
     })
   },
 
+  onHouseEnterClickPopup() {
+    this.setData({
+      ['showHouseEnterPopup']: true
+    })
+  },
+  onHouseEnterPopupConfirm(event) {
+    this.setData({['form.houseEnterTime']:new Date(event.detail)})
+    this.setData({ ['houseEnterTimeText']: this.data.form.houseEnterTime.toString()})
+    this.setData({['endMinDate']: this.data.form.houseEnterTime.getTime()})
+    this.onHouseEnterPopupClose()
+  },
+  onHouseEnterPopupClose() {
+    this.setData({
+      ['showHouseEnterPopup']: false
+    })
+  },
+  onHouseEndClickPopup() {
+    this.setData({
+      ['showHouseEndPopup']: true
+    })
+  },
+  onHouseEndPopupConfirm(event) {
+    this.setData({['form.houseEndTime']:new Date(event.detail)})
+    this.setData({ ['houseEndTimeText']: this.data.form.houseEndTime.toString()})
+    this.onHouseEndPopupClose()
+  },
+  onHouseEndPopupClose() {
+    this.setData({
+      ['showHouseEndPopup']: false
+    })
+  },
+  onHostEnterClickPopup() {
+    this.setData({
+      ['showHostEnterPopup']: true
+    })
+  },
+  onHostEnterPopupConfirm(event) {
+    this.setData({['form.hostEnterTime']:new Date(event.detail)})
+    this.setData({ ['hostEnterTimeText']: this.data.form.hostEnterTime.toString()})
+    this.setData({['endMinDate']: this.data.form.hostEnterTime.getTime()})
+    this.onHostEnterPopupClose()
+  },
+  onHostEnterPopupClose() {
+    this.setData({
+      ['showHostEnterPopup']: false
+    })
+  },
+  onHostEndClickPopup() {
+    this.setData({
+      ['showHostEndPopup']: true
+    })
+  },
+  onHostEndPopupConfirm(event) {
+    this.setData({['form.hostEndTime']:new Date(event.detail)})
+    this.setData({ ['hostEndTimeText']: this.data.form.hostEndTime.toString()})
+    this.onHostEndPopupClose()
+  },
+  onHostEndPopupClose() {
+    this.setData({
+      ['showHostEndPopup']: false
+    })
+  },
+  onSharingChange ({ detail }) {
+    this.setData({ isSharingRoom: detail });
+  },
+  onTicketChange ({ detail }) {
+    this.setData({ isTicketFrom: detail });
+  },
   onFieldChange(event) {
     let that = this
     switch (event.currentTarget.dataset.id) {
@@ -117,6 +249,7 @@ Page({
         })
         break
     }
+    
   },
 
   onFlightEnter({detail}) {
@@ -143,13 +276,15 @@ Page({
   },
   
   onSubmit: function(event){
-    for(let i in this.data.valid){
-      if(!i){
+    console.log(this.data.form)
+    for(let k in this.data.valid){
+      if (!this.data.valid[k]){
+        console.log("There is Invalid Input")
         return
       }
     }
     let data = this.data.form
-    console.log("Submitted")
+    console.log("Submitted " + JSON.stringify(data))
   },
   /**
    * Get flight information from

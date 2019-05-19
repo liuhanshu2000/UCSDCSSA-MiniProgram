@@ -5,11 +5,25 @@
   align-items: center;
 }
 
-.page {
-  background: #f1f1f1;
-  font-size: 28rpx;
-  color: #333;
-  font-family: Helvetica Neue, Helvetica, sans-serif;
+.image-container{
+  display:flex;                    
+  justify-content: center;         
+}
+
+.image-container image { 
+  width:584rpx;
+  height:130rpx;
+  margin-bottom: 40rpx;
+}
+
+.page-hd {
+  margin-bottom: 40rpx;
+}
+
+.page-title {
+  padding-left: 60rpx;
+  padding-right: 60rpx;
+  font-size: 30rpx;
 }
 
 .userinfo-avatar {
@@ -26,4 +40,12 @@
 
 .usermotto {
   margin-top: 200rpx;
+}
+
+.body.fw.d-flex-column {
+  margin: 20rpx;
+}
+
+.body.fw.d-flex-column>.signup-btn-container {
+  margin-bottom: 30rpx;
 }

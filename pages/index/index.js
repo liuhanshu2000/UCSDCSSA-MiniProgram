@@ -14,7 +14,11 @@ Page({
       url: '../form/form',
     })
   },
-  
+  toResult: function () {
+    wx.navigateTo({
+      url: '../result/result',
+    })
+  },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
@@ -22,11 +26,6 @@ Page({
     })
   },
   
-  toForm: function(){
-    wx.navigateTo({
-      url: '../form/form'
-    })
-  },
   onLoad() {
     if (app.globalData.userInfo) {
       this.setData({

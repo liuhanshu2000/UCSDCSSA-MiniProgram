@@ -1,25 +1,32 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/form/form",
+    "pages/result/result",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "usingComponents": {
     "van-button": "/miniprogram_npm/vant-weapp/button/index",
     "van-field": "/miniprogram_npm/vant-weapp/field/index",
-    "van-cell":"/miniprogram_npm/vant-weapp/cell/index",
-    "van-row":"/miniprogram_npm/vant-weapp/row/index",
-    "van-cell-group":"/miniprogram_npm/vant-weapp/cell-group/index",
-    "van-col":"/miniprogram_npm/vant-weapp/col/index",  
-    "van-datetime-picker": "/miniprogram_npm/vant-weapp/datetime-picker/index"  ,
-    "van-popup": "/miniprogram_npm/vant-weapp/popup/index",            
+    "van-cell": "/miniprogram_npm/vant-weapp/cell/index",
+    "van-row": "/miniprogram_npm/vant-weapp/row/index",
+    "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index",
+    "van-col": "/miniprogram_npm/vant-weapp/col/index",
+    "van-datetime-picker": "/miniprogram_npm/vant-weapp/datetime-picker/index",
+    "van-popup": "/miniprogram_npm/vant-weapp/popup/index",
     "van-radio": "/miniprogram_npm/vant-weapp/radio/index",
-    "van-radio-group": "/miniprogram_npm/vant-weapp/radio-group/index"
-  }
+    "van-radio-group": "/miniprogram_npm/vant-weapp/radio-group/index",
+    "van-checkbox": "/miniprogram_npm/vant-weapp/checkbox/index",
+    "van-checkbox-group": "/miniprogram_npm/vant-weapp/checkbox-group/index",
+    "van-stepper": "/miniprogram_npm/vant-weapp/stepper/index",
+    "van-switch": "/miniprogram_npm/vant-weapp/switch/index",
+    "van-area": "/miniprogram_npm/vant-weapp/area/index"
+  },
+  "sitemapLocation": "sitemap.json"
 }
