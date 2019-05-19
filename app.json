@@ -23,7 +23,9 @@
     "van-radio": "/miniprogram_npm/vant-weapp/radio/index",
     "van-radio-group": "/miniprogram_npm/vant-weapp/radio-group/index",
     "van-checkbox": "/miniprogram_npm/vant-weapp/checkbox/index",
-    "van-checkbox-group": "/miniprogram_npm/vant-weapp/checkbox-group/index"
+    "van-checkbox-group": "/miniprogram_npm/vant-weapp/checkbox-group/index",
+    "van-stepper": "/miniprogram_npm/vant-weapp/stepper/index",
+    "van-switch": "/miniprogram_npm/vant-weapp/switch/index"
   },
   "sitemapLocation": "sitemap.json"
 }

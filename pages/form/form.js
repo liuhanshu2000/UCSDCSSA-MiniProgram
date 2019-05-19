@@ -20,7 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showPopup: false,
+    showFlightPopup: false,
     timePickerText:"点击选择时间",
     valid:{
       phone:false,
@@ -31,10 +31,10 @@ Page({
       flightInfo: true,
     },
     planData: [
-      'simCard', 'bankCard', 'pickUp',
+      'simCard', 'bankCard', 'carPickUp', 'busPickUp', 'house', 'hostFamily'
     ],
     planName: [
-      '手机卡', '银行卡', '新生接机',
+      '手机卡代办', '银行卡代办', 'LA轿车接机', 'LA大巴接机','酒店住宿', '寄宿家庭'
     ],
     planResult: [],
     form: {
@@ -49,9 +49,9 @@ Page({
     }
   },
 
-  onPopupClose() {
+  onFlightPopupClose() {
     this.setData({
-      ['showPopup']: false
+      ['showFlightPopup']: false
     })
   },
   /**
@@ -75,12 +75,12 @@ Page({
   onPopupConfirm(event) {
     this.setData({['form.dateTime']:new Date(event.detail)})
     this.setData({ ['timePickerText']: this.data.form.dateTime.toString()})
-    this.onPopupClose()
+    this.onFlightPopupClose()
   },
 
   onClickPopup() {
     this.setData({
-      ['showPopup']: true
+      ['showFlightPopup']: true
     })
   },
 

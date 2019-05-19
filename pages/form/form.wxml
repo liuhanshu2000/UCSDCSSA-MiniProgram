@@ -8,6 +8,7 @@
 <view class="body fw d-flex-column">
   <!-- Basic Info-->
   <van-cell-group custom-class="cell-group" border="{{ false }}">
+    <view class="title-group">基础信息</view>
     <van-field placeholder="姓名" required bind:change="onFieldChange" data-id="name" border="{{ true }}" />
     <van-field placeholder="国内电话" required bind:change="onFieldChange" data-id="phone" border="{{ true }}" error="{{!valid.phone}}" />
     <van-field placeholder="美国电话(如有)" bind:change="onFieldChange" data-id="usPhone"
@@ -19,6 +20,7 @@
   </van-cell-group>
   <!-- Selector -->
   <van-checkbox-group value="{{ planResult }}" bind:change="onChange">
+    <view class="title-group">请选择你需要的服务【至少一项】</view>
     <van-cell-group>
       <van-cell  
         wx:for="{{ planData }}"
@@ -32,17 +34,67 @@
     </van-cell-group>
   </van-checkbox-group>
   <!-- Flight Info-->
-  <van-cell-group custom-class="cell-group" border="{{ false }}">
+  <van-cell-group custom-class="cell-group" border="{{ false }}" class="flight-info-container">
+    <view class="title-group">接机服务信息</view>
     <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}" 
     error="{{!valid.flightNum}}"/>
     <van-cell title="时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
+    <van-cell title="人数">
+      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+    </van-cell>
   </van-cell-group>
+
+  <!-- House Info-->
+  <van-cell-group custom-class="cell-group" border="{{ false }}" class="house-info-container">
+    <view class="title-group">住宿信息</view>
+    <van-cell title="开始入住时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
+    <van-cell title="住宿最后时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
+
+    <van-cell title="人数">
+      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+    </van-cell>
+    <van-cell title="房间数">
+      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+    </van-cell>
+    <van-cell title="是否拼房">
+      <van-switch checked="true" inactive-color="#992f2d"/>
+    </van-cell>
+  </van-cell-group>
+
+    <!-- Bus Info-->
+  <van-cell-group custom-class="cell-group" border="{{ false }}" class="house-info-container">
+    <view class="title-group">大巴接机服务信息</view>
+    <van-cell title="机票是否通过悦禾订票">
+      <van-switch checked="true" inactive-color="#992f2d"/>
+    </van-cell>
+  </van-cell-group>
+
+  <!-- Host Family Info-->
+  <van-cell-group title="分组1" border="{{ false }}" class="house-info-container">
+    <view class="title-group">寄宿家庭（最多三天）信息</view>
+    <van-cell title="开始入住时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
+    <van-cell title="住宿最后时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
+
+    <van-cell title="人数">
+      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+    </van-cell>
+  </van-cell-group>
+
   <!-- Submit Button -->
   <van-button square type="primary" size="large" bind:click="onSubmit">提交</van-button>
 </view>
 
-<!-- <van-popup show="{{showFlightInfo}}" position=> -->
+<!-- Flight Time Picker -->
+<van-popup show="{{ showFlightPopup }}" position="bottom" mask="{{ true }}" bind:close="onPopupClose">
+  <van-datetime-picker type="datetime" value="{{ flightTime.getTime() }}" data-id="date"     bind:cancel="onFlightPopupClose" bind:confirm="onPopupConfirm" />
+</van-popup>
 
-<van-popup show="{{ showPopup }}" position="bottom" mask="{{ true }}" bind:close="onPopupClose">
+<!-- Hotel Enter Date Picker -->
+<van-popup show="{{ showHouseEnterPopup }}" position="bottom" mask="{{ true }}" bind:close="onPopupClose">
+  <van-datetime-picker type="datetime" value="{{ flightTime.getTime() }}" data-id="date"     bind:cancel="onPopupClose" bind:confirm="onPopupConfirm" />
+</van-popup>
+
+<!-- Hotel End Date Picker -->
+<van-popup show="{{ showHouseEndPopup }}" position="bottom" mask="{{ true }}" bind:close="onPopupClose">
   <van-datetime-picker type="datetime" value="{{ flightTime.getTime() }}" data-id="date"     bind:cancel="onPopupClose" bind:confirm="onPopupConfirm" />
 </van-popup>

@@ -16,6 +16,11 @@ page {
 .cell-group {
   padding: 7px 0;
 }
+.title-group {
+  padding: 5px 15px;
+  font-size: 14px;
+  color: rgba(69,90,100,.6);
+}
 
 /**
  * Tuples - Size
