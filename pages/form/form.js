@@ -21,7 +21,17 @@ Page({
    */
   data: {
     showFlightPopup: false,
-    timePickerText:"点击选择时间",
+    showHouseEnterPopup: false,
+    showHouseEndPopup: false,
+    showHostEnterPopup: false,
+    showHostEndPopup: false,
+    flightTimeText:"点击选择时间",
+    houseEnterTimeText:"点击选择时间",
+    houseEndTimeText:"点击选择时间",
+    hostEnterTimeText:"点击选择时间",
+    hostEndTimeText:"点击选择时间",
+    isSharingRoom: false,
+    isTicketFrom: false,
     valid:{
       phone:false,
       email:false,
@@ -45,15 +55,16 @@ Page({
       email:'',
       flightInfo:{},
       flightTime: Date.now(),
+      houseEnterTime: Date.now(),
+      houseEndTime: Date.now(),
+      hostEnterTime: Date.now(),
+      hostEndTime: Date.now(),
       dateTime: new Date(0)
-    }
+    },
+    minDate: new Date().getTime(),
+    endMinDate: new Date().getTime(),
   },
 
-  onFlightPopupClose() {
-    this.setData({
-      ['showFlightPopup']: false
-    })
-  },
   /**
    * this function handles checkbox toggle events
    */
@@ -72,18 +83,90 @@ Page({
     checkbox.toggle();
   },
   noop() {},
-  onPopupConfirm(event) {
-    this.setData({['form.dateTime']:new Date(event.detail)})
-    this.setData({ ['timePickerText']: this.data.form.dateTime.toString()})
-    this.onFlightPopupClose()
-  },
-
-  onClickPopup() {
+  onFlightClickPopup() {
     this.setData({
       ['showFlightPopup']: true
     })
   },
+  onFlightPopupConfirm(event) {
+    this.setData({['form.dateTime']:new Date(event.detail)})
+    this.setData({ ['flightTimeText']: this.data.form.dateTime.toString()})
+    this.onFlightPopupClose()
+  },
+  onFlightPopupClose() {
+    this.setData({
+      ['showFlightPopup']: false
+    })
+  },
 
+  onHouseEnterClickPopup() {
+    this.setData({
+      ['showHouseEnterPopup']: true
+    })
+  },
+  onHouseEnterPopupConfirm(event) {
+    this.setData({['form.houseEnterTime']:new Date(event.detail)})
+    this.setData({ ['houseEnterTimeText']: this.data.form.houseEnterTime.toString()})
+    this.setData({['endMinDate']: this.data.form.houseEnterTime.getTime()})
+    this.onHouseEnterPopupClose()
+  },
+  onHouseEnterPopupClose() {
+    this.setData({
+      ['showHouseEnterPopup']: false
+    })
+  },
+  onHouseEndClickPopup() {
+    this.setData({
+      ['showHouseEndPopup']: true
+    })
+  },
+  onHouseEndPopupConfirm(event) {
+    this.setData({['form.houseEndTime']:new Date(event.detail)})
+    this.setData({ ['houseEndTimeText']: this.data.form.houseEndTime.toString()})
+    this.onHouseEndPopupClose()
+  },
+  onHouseEndPopupClose() {
+    this.setData({
+      ['showHouseEndPopup']: false
+    })
+  },
+  onHostEnterClickPopup() {
+    this.setData({
+      ['showHostEnterPopup']: true
+    })
+  },
+  onHostEnterPopupConfirm(event) {
+    this.setData({['form.hostEnterTime']:new Date(event.detail)})
+    this.setData({ ['hostEnterTimeText']: this.data.form.hostEnterTime.toString()})
+    this.setData({['endMinDate']: this.data.form.hostEnterTime.getTime()})
+    this.onHostEnterPopupClose()
+  },
+  onHostEnterPopupClose() {
+    this.setData({
+      ['showHostEnterPopup']: false
+    })
+  },
+  onHostEndClickPopup() {
+    this.setData({
+      ['showHostEndPopup']: true
+    })
+  },
+  onHostEndPopupConfirm(event) {
+    this.setData({['form.hostEndTime']:new Date(event.detail)})
+    this.setData({ ['hostEndTimeText']: this.data.form.hostEndTime.toString()})
+    this.onHostEndPopupClose()
+  },
+  onHostEndPopupClose() {
+    this.setData({
+      ['showHostEndPopup']: false
+    })
+  },
+  onSharingChange ({ detail }) {
+    this.setData({ isSharingRoom: detail });
+  },
+  onTicketChange ({ detail }) {
+    this.setData({ isTicketFrom: detail });
+  },
   onFieldChange(event) {
     let that = this
     switch (event.currentTarget.dataset.id) {

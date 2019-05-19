@@ -16,6 +16,8 @@
     <van-field placeholder="邮箱" required bind:change="onFieldChange" data-id="email" border="{{true}}"
     error="{{!valid.email}}" />
     <van-field placeholder="微信号" required bind:change="onFieldChange" data-id="weChat" border="{{ true }}" />
+    <van-field placeholder="你的城市" required bind:change="onFieldChange" data-id="city" border="{{ true }}" />
+
     <van-field placeholder="家长联系方式(手机号/微信/QQ)" required bind:change="onFieldChange" data-id="parentContact" border="{{ true }}" />
   </van-cell-group>
   <!-- Selector -->
@@ -38,7 +40,7 @@
     <view class="title-group">接机服务信息</view>
     <van-field placeholder="航班号" bind:change="onFlightEnter" border="{{true}}" 
     error="{{!valid.flightNum}}"/>
-    <van-cell title="时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
+    <van-cell title="时间" value="{{flightTimeText}}" bind:tap="onFlightClickPopup" />
     <van-cell title="人数">
       <van-stepper value="{{ 1 }}" bind:change="onChange" />
     </van-cell>
@@ -46,9 +48,9 @@
 
   <!-- House Info-->
   <van-cell-group custom-class="cell-group" border="{{ false }}" class="house-info-container">
-    <view class="title-group">住宿信息</view>
-    <van-cell title="开始入住时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
-    <van-cell title="住宿最后时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
+    <view class="title-group">酒店住宿信息</view>
+    <van-cell title="开始入住时间" value="{{houseEnterTimeText}}" bind:tap="onHouseEnterClickPopup" />
+    <van-cell title="住宿最后时间" value="{{houseEndTimeText}}" bind:tap="onHouseEndClickPopup" />
 
     <van-cell title="人数">
       <van-stepper value="{{ 1 }}" bind:change="onChange" />
@@ -57,7 +59,7 @@
       <van-stepper value="{{ 1 }}" bind:change="onChange" />
     </van-cell>
     <van-cell title="是否拼房">
-      <van-switch checked="true" inactive-color="#992f2d"/>
+      <van-switch checked="{{isSharingRoom}}" active-color="#992f2d" bind:change="onSharingChange" />
     </van-cell>
   </van-cell-group>
 
@@ -65,15 +67,15 @@
   <van-cell-group custom-class="cell-group" border="{{ false }}" class="house-info-container">
     <view class="title-group">大巴接机服务信息</view>
     <van-cell title="机票是否通过悦禾订票">
-      <van-switch checked="true" inactive-color="#992f2d"/>
+      <van-switch checked="{{isTicketFrom}}" active-color="#992f2d" bind:change="onTicketChange"/>
     </van-cell>
   </van-cell-group>
 
   <!-- Host Family Info-->
   <van-cell-group title="分组1" border="{{ false }}" class="house-info-container">
     <view class="title-group">寄宿家庭（最多三天）信息</view>
-    <van-cell title="开始入住时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
-    <van-cell title="住宿最后时间" value="{{timePickerText}}" bind:tap="onClickPopup" />
+    <van-cell title="开始入住时间" value="{{hostEnterTimeText}}" bind:tap="onHostEnterClickPopup" />
+    <van-cell title="住宿最后时间" value="{{hostEndTimeText}}" bind:tap="onHostEndClickPopup" />
 
     <van-cell title="人数">
       <van-stepper value="{{ 1 }}" bind:change="onChange" />
@@ -86,15 +88,25 @@
 
 <!-- Flight Time Picker -->
 <van-popup show="{{ showFlightPopup }}" position="bottom" mask="{{ true }}" bind:close="onPopupClose">
-  <van-datetime-picker type="datetime" value="{{ flightTime.getTime() }}" data-id="date"     bind:cancel="onFlightPopupClose" bind:confirm="onPopupConfirm" />
+  <van-datetime-picker type="datetime" value="{{ dateTime.getTime() }}" data-id="date"     bind:cancel="onFlightPopupClose" bind:confirm="onFlightPopupConfirm" min-date="{{ minDate }}"/>
 </van-popup>
 
 <!-- Hotel Enter Date Picker -->
-<van-popup show="{{ showHouseEnterPopup }}" position="bottom" mask="{{ true }}" bind:close="onPopupClose">
-  <van-datetime-picker type="datetime" value="{{ flightTime.getTime() }}" data-id="date"     bind:cancel="onPopupClose" bind:confirm="onPopupConfirm" />
+<van-popup show="{{ showHouseEnterPopup }}" position="bottom" mask="{{ true }}" bind:close="onHouseEnterPopupClose">
+  <van-datetime-picker type="datetime" value="{{ houseEnterTime.getTime() }}" data-id="date"     bind:cancel="onHouseEnterPopupClose" bind:confirm="onHouseEnterPopupConfirm" min-date="{{ minDate }}"/>
 </van-popup>
 
 <!-- Hotel End Date Picker -->
-<van-popup show="{{ showHouseEndPopup }}" position="bottom" mask="{{ true }}" bind:close="onPopupClose">
-  <van-datetime-picker type="datetime" value="{{ flightTime.getTime() }}" data-id="date"     bind:cancel="onPopupClose" bind:confirm="onPopupConfirm" />
+<van-popup show="{{ showHouseEndPopup }}" position="bottom" mask="{{ true }}" bind:close="onHouseEndPopupClose">
+  <van-datetime-picker type="datetime" value="{{ houseEndTime.getTime() }}" data-id="date" bind:cancel="onHouseEndPopupClose" bind:confirm="onHouseEndPopupConfirm" min-date="{{ endMinDate }}"/>
+</van-popup>
+
+<!-- Host Enter Date Picker -->
+<van-popup show="{{ showHostEnterPopup }}" position="bottom" mask="{{ true }}" bind:close="onHostEnterPopupClose">
+  <van-datetime-picker type="datetime" value="{{ hostEnterTime.getTime() }}" data-id="date"     bind:cancel="onHostEnterPopupClose" bind:confirm="onHostEnterPopupConfirm" min-date="{{ minDate }}"/>
+</van-popup>
+
+<!-- Host End Date Picker -->
+<van-popup show="{{ showHostEndPopup }}" position="bottom" mask="{{ true }}" bind:close="onHostEndPopupClose">
+  <van-datetime-picker type="datetime" value="{{ hostEndTime.getTime() }}" data-id="date" bind:cancel="onHostEndPopupClose" bind:confirm="onHostEndPopupConfirm" min-date="{{ endMinDate }}"/>
 </van-popup>
