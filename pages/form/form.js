@@ -62,12 +62,15 @@ Page({
       email:'',
       flightInfo:{},
       flightTime: Date.now(),
+      flightNum: 0,
+      hotelNum: 0,
+      hotelRoomNum: 0,
       houseEnterTime: Date.now(),
       houseEndTime: Date.now(),
       hostEnterTime: Date.now(),
       hostEndTime: Date.now(),
       dateTime: new Date(0),
-      city: []
+      city: [],
     },
     minDate: new Date().getTime(),
     endMinDate: new Date().getTime(),
@@ -76,10 +79,19 @@ Page({
   /**
    * this function handles checkbox toggle events
    */
-  onChange(event) {
+  onCheckChange(event) {
     this.setData({
       planResult: event.detail,
     })
+  },
+  onFlightNumChange(event) {
+    this.setData({['form.flightNum']: event.detail})
+  },
+  onHotelNumChange(event) {
+    this.setData({['form.hotelNum']: event.detail})
+  },
+  onHotelRoomNumChange(event) {
+    this.setData({['form.hotelRoomNum']: event.detail})
   },
   /**
    * this function handles checkbox cell click events

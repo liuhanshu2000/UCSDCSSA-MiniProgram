@@ -21,7 +21,7 @@
     <van-field placeholder="家长联系方式(手机号/微信/QQ)" required bind:change="onFieldChange" data-id="parentContact" border="{{ true }}" />
   </van-cell-group>
   <!-- Selector -->
-  <van-checkbox-group value="{{ planResult }}" bind:change="onChange">
+  <van-checkbox-group value="{{ planResult }}" bind:change="onCheckChange">
     <view class="title-group">请选择你需要的服务【至少一项】</view>
     <van-cell-group>
       <van-cell  
@@ -42,7 +42,7 @@
     error="{{!valid.flightNum}}"/>
     <van-cell title="时间" value="{{flightTimeText}}" bind:tap="onFlightClickPopup" />
     <van-cell title="人数">
-      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+      <van-stepper value="{{ 1 }}" bind:change="onFlightNumChange" />
     </van-cell>
   </van-cell-group>
 
@@ -53,10 +53,10 @@
     <van-cell title="住宿最后时间" value="{{houseEndTimeText}}" bind:tap="onHouseEndClickPopup" />
 
     <van-cell title="人数">
-      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+      <van-stepper value="{{ 1 }}" bind:change="onHotelNumChange" />
     </van-cell>
     <van-cell title="房间数">
-      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+      <van-stepper value="{{ 1 }}" bind:change="onHotelRoomNumChange" />
     </van-cell>
     <van-cell title="是否拼房">
       <van-switch checked="{{isSharingRoom}}" active-color="#992f2d" bind:change="onSharingChange" />
