@@ -16,7 +16,7 @@
     <van-field placeholder="邮箱" required bind:change="onFieldChange" data-id="email" border="{{true}}"
     error="{{!valid.email}}" />
     <van-field placeholder="微信号" required bind:change="onFieldChange" data-id="weChat" border="{{ true }}" />
-    <van-field placeholder="你的城市" required bind:change="onFieldChange" data-id="city" border="{{ true }}" />
+    <van-cell title="你的城市" value="{{cityText}}" bind:tap="onCityClickPopup" />
 
     <van-field placeholder="家长联系方式(手机号/微信/QQ)" required bind:change="onFieldChange" data-id="parentContact" border="{{ true }}" />
   </van-cell-group>
@@ -109,4 +109,8 @@
 <!-- Host End Date Picker -->
 <van-popup show="{{ showHostEndPopup }}" position="bottom" mask="{{ true }}" bind:close="onHostEndPopupClose">
   <van-datetime-picker type="datetime" value="{{ hostEndTime.getTime() }}" data-id="date" bind:cancel="onHostEndPopupClose" bind:confirm="onHostEndPopupConfirm" min-date="{{ endMinDate }}"/>
+</van-popup>
+
+<van-popup show="{{ showCityPopup }}" position="bottom" mask="{{ true }}" bind:close="onCityPopupClose">
+  <van-area area-list="{{ areaList }}" bind:cancel="onCityPopupClose" bind:confirm="onCityPopupConfirm"/>
 </van-popup>

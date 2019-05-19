@@ -25,7 +25,8 @@
     "van-checkbox": "/miniprogram_npm/vant-weapp/checkbox/index",
     "van-checkbox-group": "/miniprogram_npm/vant-weapp/checkbox-group/index",
     "van-stepper": "/miniprogram_npm/vant-weapp/stepper/index",
-    "van-switch": "/miniprogram_npm/vant-weapp/switch/index"
+    "van-switch": "/miniprogram_npm/vant-weapp/switch/index",
+    "van-area": "/miniprogram_npm/vant-weapp/area/index"
   },
   "sitemapLocation": "sitemap.json"
 }

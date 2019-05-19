@@ -4,7 +4,7 @@ let app = getApp()
 let username = auth.username;
 let apiKey = auth.APIKey;
 const fxml_url = `http://${username}:${apiKey}@flightxml.flightaware.com/json/FlightXML2/FlightInfoEx`;
-
+import areaList from "./area.js";
 //Debounce utility
 const debounce = (fn, time) => {
   let timeout;
@@ -20,6 +20,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    areaList: areaList,
+    showCityPopup: false,
     showFlightPopup: false,
     showHouseEnterPopup: false,
     showHouseEndPopup: false,
@@ -30,6 +32,7 @@ Page({
     houseEndTimeText:"点击选择时间",
     hostEnterTimeText:"点击选择时间",
     hostEndTimeText:"点击选择时间",
+    cityText:"点击选择城市",
     isSharingRoom: false,
     isTicketFrom: false,
     valid:{
@@ -59,7 +62,8 @@ Page({
       houseEndTime: Date.now(),
       hostEnterTime: Date.now(),
       hostEndTime: Date.now(),
-      dateTime: new Date(0)
+      dateTime: new Date(0),
+      cityCode: 0
     },
     minDate: new Date().getTime(),
     endMinDate: new Date().getTime(),
@@ -83,6 +87,22 @@ Page({
     checkbox.toggle();
   },
   noop() {},
+  onCityClickPopup() {
+    this.setData({
+      ['showCityPopup']: true
+    })
+  },
+  onCityPopupConfirm(event) {
+    console.log(event.detail);
+    this.setData({['form.city']:event.detail.values});
+    this.setData({ ['cityText']: this.data.form.city[0].name + '/' + this.data.form.city[1].name + '/' + this.data.form.city[2].name})
+    this.onCityPopupClose();
+  },
+  onCityPopupClose() {
+    this.setData({
+      ['showCityPopup']: false
+    })
+  },
   onFlightClickPopup() {
     this.setData({
       ['showFlightPopup']: true
@@ -91,7 +111,7 @@ Page({
   onFlightPopupConfirm(event) {
     this.setData({['form.dateTime']:new Date(event.detail)})
     this.setData({ ['flightTimeText']: this.data.form.dateTime.toString()})
-    this.onFlightPopupClose()
+    this.onFlightPopupClose();
   },
   onFlightPopupClose() {
     this.setData({
