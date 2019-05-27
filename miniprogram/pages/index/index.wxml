@@ -2,7 +2,7 @@
 <view class="page-hd">
 
   <view class='image-container'>
-    <image src="https://ucsdcssa.org/wp-content/uploads/2017/10/cropped-logo_name-1.png"/>
+    <image src="../../images/cssa.png"/>
   </view>
 
   <view class="page-title">

@@ -4,6 +4,7 @@ let app = getApp()
 let username = auth.username;
 let apiKey = auth.APIKey;
 const fxml_url = `http://${username}:${apiKey}@flightxml.flightaware.com/json/FlightXML2/FlightInfoEx`;
+import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
 import areaList from "./area.js";
 //Debounce utility
 const debounce = (fn, time) => {
@@ -33,21 +34,14 @@ Page({
     hostEnterTimeText:"点击选择时间",
     hostEndTimeText:"点击选择时间",
     cityText:"点击选择城市",
-    flightStatus: false,
-    hotelStatus: false,
-    busStatus: false,
-    hostStatus: false,
-    isSharingRoom: false,
-    isTicketFrom: false,
-    empty:{ 
-      phone: true,
-      email:true,
-      flightNum: true
-    },
+    isSubmiting: false,
     valid:{
+      name: true,
       phone:true,
       email:true,
-      flightNum: true //航班号valid
+      flightNum: true, //航班号valid
+      weChat: true,
+      parentContact: true,
     },
     visible:{
       flightInfo: true,
@@ -65,6 +59,7 @@ Page({
       usPhone:'',
       weChat: '',
       email:'',
+      parentContact: '',
       flightInfo:{},
       flightTime: Date.now(),
       flightNum: 0, //接机人数
@@ -76,6 +71,12 @@ Page({
       hostEndTime: Date.now(),
       dateTime: new Date(0),
       city: [],
+      flightStatus: false,
+      hotelStatus: false,
+      busStatus: false,
+      hostStatus: false,
+      isSharingRoom: false,
+      isTicketFrom: false,
     },
     minDate: new Date().getTime(),
     endMinDate: new Date().getTime(),
@@ -107,16 +108,24 @@ Page({
     checkbox.toggle();
     switch (name) {
       case 'carPickUp':
-        this.setData({ flightStatus: !this.data.flightStatus });
+        this.setData({  
+          'form.flightStatus': !this.data.form.flightStatus 
+        });
         break;
       case 'house':
-        this.setData({ hotelStatus: !this.data.hotelStatus });
+        this.setData({ 
+          'form.hotelStatus': !this.data.form.hotelStatus 
+        });
         break;
       case 'busPickUp':
-        this.setData({ busStatus: !this.data.busStatus });
+        this.setData({
+          'form.busStatus': !this.data.form.busStatus 
+        });
         break;
       case 'hostFamily':
-        this.setData({ hostStatus: !this.data.hostStatus });
+        this.setData({ 
+          'form.hostStatus': !this.data.form.hostStatus 
+        });
         break;
     }
   },
@@ -226,7 +235,8 @@ Page({
       //then set respective data field
       case "name":
         that.setData({
-          ["form.name"]: event.detail
+          ["form.name"]: event.detail,
+          ["valid.name"]: true
         })
         break
       case "phone":
@@ -237,19 +247,26 @@ Page({
         break
       case "weChat":
         that.setData({
-          ["form.weChat"]: event.detail
+          ["form.weChat"]: event.detail,
+          ["valid.weChat"]: true
         })
         break  
       case "usPhone":
         that.setData({
           ["form.usPhone"]: event.detail,
-          ["valid.usPhone"]: this.isValidUSPhone(event.detail)
+          // ["valid.usPhone"]: this.isValidUSPhone(event.detail)
         })  
         break    
       case "email":
         that.setData({
           ["form.email"]:event.detail,
           ["valid.email"]:this.isValidEmail(event.detail)
+        })
+        break
+      case "parentContact":
+        that.setData({
+          ["form.parentContact"]: event.detail,
+          ["valid.parentContact"]: true
         })
         break
     }
@@ -280,31 +297,53 @@ Page({
   },
   
   onSubmit: function(event){
-    console.log(this.data.form)
-    // 1. 获取数据库引用
-    const db = wx.cloud.database()
-    // 2. 构造查询语句
-    // collection 方法获取一个集合的引用
-    // where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表
-      // get 方法会触发网络请求，往数据库取数据
-      db.collection('books').where({
-        publishInfo: {
-          country: 'United States'
-        }
-      }).get({
-        success(res) {
-          // 输出 [{ "title": "The Catcher in the Rye", ... }]
-          console.log(res)
-        }
-      })
+    console.log(this.data.form);
+    this.setData({ isSubmiting: true})
+
+    // 如果名字为空，则不是valid
+    if (!this.data.form.name) {
+      this.setData({ ["valid.name"]: false })
+    } 
+    if (!this.data.form.phone) {
+      this.setData({ ["valid.phone"]: false })
+    }
+    if (!this.data.form.email) {
+      this.setData({ ["valid.email"]: false })
+    }
+    if (!this.data.form.weChat) {
+      this.setData({ ["valid.weChat"]: false })
+    }
+    if (!this.data.form.parentContact) {
+      this.setData({ ["valid.parentContact"]: false })
+    }
     for(let k in this.data.valid){
       if (!this.data.valid[k]){
-        console.log("There is Invalid Input")
-        return
+        Notify({
+          text: '请在填好必要内容后再提交喔',
+          duration: 1000,
+          selector: '#van-notify',
+          backgroundColor: '#FF4444'
+        });
+        this.setData({ isSubmiting: false })
+        return;
       }
     }
     let data = this.data.form
     console.log("Submitted " + JSON.stringify(data))
+    const db = wx.cloud.database()
+
+    db.collection('students-2023').add({
+      // data 字段表示需新增的 JSON 数据
+      // due: new Date('2018-09-01'),
+      data: this.data.form,
+      success: (res) => {
+        // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+        console.log(res)
+        this.setData({ isSubmiting: false })
+        return
+      }
+    })
+
   },
   /**
    * Get flight information from
