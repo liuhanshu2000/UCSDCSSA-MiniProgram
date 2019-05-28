@@ -85,6 +85,7 @@
   <!-- Submit Button -->
   <van-button square loading="{{isSubmiting}}" type="primary" size="large" bind:click="onSubmit">提交</van-button>
   <van-notify id="van-notify" />
+  <van-dialog id="van-dialog" />
 </view>
 
 <!-- Flight Time Picker -->

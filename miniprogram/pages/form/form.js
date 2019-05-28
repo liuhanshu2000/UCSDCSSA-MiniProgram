@@ -5,6 +5,8 @@ let username = auth.username;
 let apiKey = auth.APIKey;
 const fxml_url = `http://${username}:${apiKey}@flightxml.flightaware.com/json/FlightXML2/FlightInfoEx`;
 import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
+import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog';
+
 import areaList from "./area.js";
 //Debounce utility
 const debounce = (fn, time) => {
@@ -354,8 +356,14 @@ Page({
       data: this.data.form,
       success: (res) => {
         // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-        console.log(res)
-        this.setData({ isSubmiting: false })
+        Dialog.alert({
+          title: 'CSSA',
+          message: '提交成功！'
+        }).then(() => {
+          wx.redirectTo({
+            url: '../index/index',
+          })
+        });
         return
       }
     })

@@ -16,7 +16,7 @@ Page({
   },
   toResult: function () {
     wx.navigateTo({
-      url: '../result/result',
+      url: '../login/login',
     })
   },
   //事件处理函数
