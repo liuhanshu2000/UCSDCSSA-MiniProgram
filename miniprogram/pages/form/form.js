@@ -65,12 +65,15 @@ Page({
       flightNum: 0, //接机人数
       hotelNum: 0,
       hotelRoomNum: 0,
+      hostNum: 0,
       houseEnterTime: Date.now(),
       houseEndTime: Date.now(),
       hostEnterTime: Date.now(),
       hostEndTime: Date.now(),
       dateTime: new Date(0),
       city: [],
+      simCard: false,
+      bankCard: false,
       flightStatus: false,
       hotelStatus: false,
       busStatus: false,
@@ -96,6 +99,9 @@ Page({
   onHotelNumChange(event) {
     this.setData({['form.hotelNum']: event.detail})
   },
+  onHostNumChange(event) {
+    this.setData({['form.hostNum']: event.detail})
+  },
   onHotelRoomNumChange(event) {
     this.setData({['form.hotelRoomNum']: event.detail})
   },
@@ -107,6 +113,16 @@ Page({
     const checkbox = this.selectComponent(`.checkboxes-${name}`);
     checkbox.toggle();
     switch (name) {
+      case 'simCard':
+          this.setData({  
+            'form.simCard': !this.data.form.simCard 
+          });
+          break;
+      case 'bankCard':
+          this.setData({  
+            'form.bankCard': !this.data.form.bankCard 
+          });
+          break;
       case 'carPickUp':
         this.setData({  
           'form.flightStatus': !this.data.form.flightStatus 
@@ -223,10 +239,10 @@ Page({
     })
   },
   onSharingChange ({ detail }) {
-    this.setData({ isSharingRoom: detail });
+    this.setData({ "form.isSharingRoom": detail });
   },
   onTicketChange ({ detail }) {
-    this.setData({ isTicketFrom: detail });
+    this.setData({ "form.isTicketFrom": detail });
   },
   onFieldChange(event) {
     let that = this

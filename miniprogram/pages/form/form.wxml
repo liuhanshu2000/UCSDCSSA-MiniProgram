@@ -78,7 +78,7 @@
     <van-cell title="住宿最后时间" value="{{hostEndTimeText}}" bind:tap="onHostEndClickPopup" />
 
     <van-cell title="人数">
-      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+      <van-stepper value="{{ 1 }}" bind:change="onHostNumChange" />
     </van-cell>
   </van-cell-group>
 
