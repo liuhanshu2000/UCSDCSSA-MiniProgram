@@ -1,6 +1,0 @@
-<!--pages/result/result.wxml-->
-
-<view class="page__hd">
-  <view class="page__title">新生接机报名表</view>
-  <view class="page__desc">亲爱的UCSD 2023ers你们好！感谢你对CSSA的支持与信任，CSSA期待与你相见</view>
-</view>

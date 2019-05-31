@@ -1,0 +1,90 @@
+<!--pages/result/result.wxml-->
+
+<view class="page__hd">
+  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+    <van-collapse-item 
+      wx:for="{{ studentsData }}"
+      wx:key="index"
+      title="{{ item.name }}" name="{{index}}">
+      <van-cell-group>
+        <van-cell title="名字">
+          {{item.name}}
+        </van-cell> 
+        <van-cell title="国内电话">
+          {{item.phone}}
+        </van-cell> 
+        <van-cell title="美国电话" wx:if="{{item.usPhone}}">
+          {{item.usPhone}}
+        </van-cell> 
+        <van-cell title="邮箱">
+          {{item.email}}
+        </van-cell> 
+        <van-cell title="微信">
+          {{item.weChat}}
+        </van-cell> 
+        <van-cell title="城市" wx:if="{{item.city.length}}">
+          {{item.city[0].name}}/
+          {{item.city[1].name}}/
+          {{item.city[2].name}}
+        </van-cell> 
+        <van-cell title="家长联系方式">
+          {{item.parentContact}}
+        </van-cell> 
+      </van-cell-group>
+      <van-cell-group>
+        <van-cell title="需要手机卡代办" wx:if="{{item.simCard}}">
+        </van-cell>
+        <van-cell title="需要银行卡代办" wx:if="{{item.bankCard}}">
+        </van-cell>
+        <van-cell title="需要LA轿车接机" wx:if="{{item.flightStatus}}">
+        </van-cell>
+        <van-cell title="航班号" wx:if="{{item.flightStatus && item.flightInfo.ident}}">
+        {{item.flightInfo.ident}}
+        </van-cell>
+        <van-cell title="时间" wx:if="{{item.flightStatus && item.flightTime}}">
+          {{item.flightTime}}
+        </van-cell>
+          <van-cell title="人数" wx:if="{{item.flightStatus && item.flightNum}}">
+          {{item.flightNum}}
+        </van-cell>
+        <van-cell title="需要LA大巴接机" wx:if="{{item.busStatus && item.isTicketFrom}}">
+          机票通过悦禾订票
+        </van-cell>
+        <van-cell title="需要LA大巴接机" wx:if="{{item.busStatus && !item.isTicketFrom}}">
+          机票不是通过悦禾订票
+        </van-cell>
+        <van-cell title="需要酒店住宿" wx:if="{{item.hotelStatus}}">
+        </van-cell>
+        <van-cell title="开始入住时间" wx:if="{{item.hotelStatus && item.houseEnterTime}}">
+          {{item.houseEnterTime}}
+        </van-cell>
+        <van-cell title="住宿最后时间" wx:if="{{item.hotelStatus && item.houseEndTime}}">
+          {{item.houseEndTime}}
+        </van-cell>
+        <van-cell title="人数" wx:if="{{item.hotelStatus && item.hotelNum}}">
+          {{item.hotelNum}}
+        </van-cell>
+        <van-cell title="房间数" wx:if="{{item.hotelStatus && item.hotelRoomNum}}">
+          {{item.hotelRoomNum}}
+        </van-cell>
+        <van-cell title="是否拼房" wx:if="{{item.hotelStatus && item.isSharingRoom}}">
+          拼房
+        </van-cell>
+        <van-cell title="是否拼房" wx:if="{{item.hotelStatus && !item.isSharingRoom}}">
+          不拼房
+        </van-cell>
+        <van-cell title="需要寄宿家庭" wx:if="{{item.hostStatus}}">
+        </van-cell>
+         <van-cell title="开始入住时间" wx:if="{{item.hostStatus && item.hostEnterTime}}">
+          {{item.hostEnterTime}}
+        </van-cell>
+        <van-cell title="住宿最后时间" wx:if="{{item.hostStatus && item.hostEndTime}}">
+          {{item.hostEndTime}}
+        </van-cell>
+        <van-cell title="人数" wx:if="{{item.hostStatus && item.hostNum}}">
+          {{item.hostNum}}
+        </van-cell>
+      </van-cell-group>
+    </van-collapse-item>
+  </van-collapse>
+</view>
