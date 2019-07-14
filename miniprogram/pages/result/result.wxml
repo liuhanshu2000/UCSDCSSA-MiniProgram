@@ -42,7 +42,7 @@
         {{item.flightInfo.ident}}
         </van-cell>
         <van-cell title="时间" wx:if="{{item.flightStatus && item.flightTime}}">
-          {{item.flightTime}}
+          {{item.dateTime}}
         </van-cell>
           <van-cell title="人数" wx:if="{{item.flightStatus && item.flightNum}}">
           {{item.flightNum}}
