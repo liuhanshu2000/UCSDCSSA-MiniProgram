@@ -26,27 +26,40 @@ Page({
     this.setData({
       isSubmiting: !this.data.isSubmiting,
     });
-    const db = wx.cloud.database();
-    db.collection('cssa-managers').get({
-      success: (res) => {
-        // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
-        if (this.data.password == res.data[0].password) {
-          wx.redirectTo({
-            url: '../result/result',
-          })
-        }
-        else {
-          Notify({
-            text: '密码错误！',
-            duration: 1000,
-            selector: '#van-notify',
-            backgroundColor: '#FF4444'
-          });
-        }
-        this.setData({ isSubmiting: false })
-      }
-    })
-    
+    // const db = wx.cloud.database();
+    // db.collection('cssa-managers').get({
+    //   success: (res) => {
+    //     // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
+    //     if (this.data.password == res.data[0].password) {
+    //       wx.redirectTo({
+    //         url: '../result/result',
+    //       })
+    //     }
+    //     else {
+    //       Notify({
+    //         text: '密码错误！',
+    //         duration: 1000,
+    //         selector: '#van-notify',
+    //         backgroundColor: '#FF4444'
+    //       });
+    //     }
+    //     this.setData({ isSubmiting: false })
+    //   }
+    // })
+    if (this.data.password == "ucsdcssa1024") {
+      wx.redirectTo({
+        url: '../result/result',
+      })
+    }
+    else {
+      Notify({
+        text: '密码错误！',
+        duration: 1000,
+        selector: '#van-notify',
+        backgroundColor: '#FF4444'
+      });
+    }
+    this.setData({ isSubmiting: false })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
