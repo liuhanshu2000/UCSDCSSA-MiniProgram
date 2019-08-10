@@ -27,10 +27,11 @@ Page({
       isSubmiting: !this.data.isSubmiting,
     });
     const db = wx.cloud.database();
-    db.collection('cssa-managers').get({
+    db.collection('cssa-managers').where({}).get({
       success: (res) => {
         // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
         if (this.data.password == res.data[0].password) {
+          console.log("登录成功")
           wx.redirectTo({
             url: '../result/result',
           })

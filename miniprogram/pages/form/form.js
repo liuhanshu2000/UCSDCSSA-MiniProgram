@@ -298,6 +298,8 @@ Page({
       return;
     }
     that.setData({ ["valid.flightNum"]: true })
+    return;
+    //TODO: disabled flight number query, only checks validity 
     this.getFlightInfo(detail).then(res => {
       if (res.hasOwnProperty('error')){
         //No response from server
@@ -349,7 +351,7 @@ Page({
     let data = this.data.form
     console.log("Submitted " + JSON.stringify(data))
     const db = wx.cloud.database()
-
+    
     db.collection('students-2023').add({
       // data 字段表示需新增的 JSON 数据
       // due: new Date('2018-09-01'),
