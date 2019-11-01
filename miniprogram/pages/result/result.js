@@ -8,6 +8,7 @@ Page({
     activeNames: [''],
     studentsData: []
   },
+
   onChange(event) {
     this.setData({
       activeNames: event.detail
