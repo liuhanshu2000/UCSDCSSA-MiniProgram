@@ -31,7 +31,9 @@
     "van-notify": "/miniprogram_npm/vant-weapp/notify/index",
     "van-collapse": "/miniprogram_npm/vant-weapp/collapse/index",
     "van-collapse-item": "/miniprogram_npm/vant-weapp/collapse-item/index",
-    "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index"
+    "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index",
+    "van-grid": "/miniprogram_npm/vant-weapp/grid/index",
+    "van-grid-item": "/miniprogram_npm/vant-weapp/grid-item/index"
   },
   "sitemapLocation": "sitemap.json"
 }

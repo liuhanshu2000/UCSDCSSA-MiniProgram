@@ -7,6 +7,11 @@ Page({
   data: {
 
   },
+  toForm: function () {
+    wx.navigateTo({
+      url: '../form/form',
+    })
+  },
 
   /**
    * Lifecycle function--Called when page load

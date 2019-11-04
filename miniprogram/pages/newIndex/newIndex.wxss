@@ -1,1 +1,35 @@
 /* miniprogram/pages/newIndex.wxss */
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-container{
+  display:flex;
+  justify-content: center;
+}
+
+.image-container image {
+  width:584rpx;
+  height:130rpx;
+  margin-bottom: 40rpx;
+}
+
+.page-hd {
+  margin-bottom: 40rpx;
+}
+
+.page-title {
+  height: 200rpx;
+  font-size: 30rpx;
+}
+
+.body.fw.d-flex-column {
+  margin: 20rpx;
+}
+
+.body.fw.d-flex-column>.signup-btn-container {
+  margin-bottom: 30rpx;
+}

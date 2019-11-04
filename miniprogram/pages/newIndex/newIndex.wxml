@@ -1,2 +1,20 @@
 <!--miniprogram/pages/newIndex.wxml-->
-<text>miniprogram/pages/newIndex.wxml</text>
+
+<view class="page-hd">
+
+  <view class='image-container'>
+    <image src="../../images/cssa.png"/>
+  </view>
+
+  <view class="page-title">
+    <van-grid column-num="3" square>
+      <van-grid-item icon="photo-o" text="接机" bind:click="toForm"/>
+      <van-grid-item icon="photo-o" text="文字" info="off"/>
+      <van-grid-item icon="photo-o" text="文字" info="off"/>
+      <van-grid-item icon="photo-o" text="文字" info="off"/>
+      <van-grid-item icon="photo-o" text="文字" info="off"/>
+      <van-grid-item icon="photo-o" text="文字" info="off"/>
+    </van-grid>
+  </view>
+
+</view>

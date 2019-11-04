@@ -19,13 +19,18 @@ Page({
       url: '../login/login',
     })
   },
+  toHomePage: function () {
+    wx.navigateTo({
+      url: '../newIndex/newIndex',
+    })
+  },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
-  
+
   onLoad() {
     if (app.globalData.userInfo) {
       this.setData({
