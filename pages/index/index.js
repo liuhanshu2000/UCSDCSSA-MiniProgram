@@ -14,7 +14,20 @@ Page({
       url: '../form/form',
     })
   },
+<<<<<<< Updated upstream:pages/index/index.js
   
+=======
+  toResult: function () {
+    wx.navigateTo({
+      url: '../login/login',
+    })
+  },
+  toHomePage: function () {
+    wx.navigateTo({
+      url: '../newIndex/newIndex',
+    })
+  },
+>>>>>>> Stashed changes:miniprogram/pages/index/index.js
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
