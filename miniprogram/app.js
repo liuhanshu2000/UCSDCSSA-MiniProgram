@@ -20,7 +20,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-  
+
       }
     })
   },
@@ -40,7 +40,7 @@ App({
       }})
     })
   },
-  
+
   globalData: {
     userInfo: null,
     formTitle: "新生接机注册",
