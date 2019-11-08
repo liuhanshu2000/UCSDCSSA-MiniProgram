@@ -4,7 +4,7 @@
   "description": "WeChat mini program for UCSD CSSA",
   "main": "app.js",
   "dependencies": {
-    "vant-weapp": "^0.5.7"
+    "vant-weapp": "^2.2.10"
   },
   "devDependencies": {},
   "scripts": {

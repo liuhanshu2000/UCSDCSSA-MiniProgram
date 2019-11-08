@@ -15,7 +15,12 @@
   <view class="signup-btn-container" >
     <van-button round type="primary" size="large" bind:click="toForm">接机报名</van-button>
   </view>
-  <van-button round type="secondary" size="large" bind:click="toResult">结果查看</van-button>
+  <view class="signup-btn-container" >
+    <van-button round type="secondary" size="large" bind:click="toResult">结果查看</van-button>
+  </view>
+  <view class="signup-btn-container" >
+    <van-button round type="secondary" size="large" bind:click="toHomePage">首页</van-button>
+  </view>
 
 </view>
 
