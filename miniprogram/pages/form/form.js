@@ -1,9 +1,9 @@
 // pages/form/form.js
-let auth = require('flightXMLAuth')
+// let auth = require('flightXMLAuth')
 let app = getApp()
-let username = auth.username;
-let apiKey = auth.APIKey;
-const fxml_url = `http://${username}:${apiKey}@flightxml.flightaware.com/json/FlightXML2/FlightInfoEx`;
+// let username = auth.username;
+// let apiKey = auth.APIKey;
+// const fxml_url = `http://${username}:${apiKey}@flightxml.flightaware.com/json/FlightXML2/FlightInfoEx`;
 import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
 import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog';
 
