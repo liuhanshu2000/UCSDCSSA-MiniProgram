@@ -17,6 +17,17 @@
     </van-grid>
   </view>
 
+
+
+    <view class='blocks'>
+      <block wx:for="{{blocksList}}" wx:key="{{item}}">
+        <view class='blocks-item'>
+          <view class="blocks-image">
+            <image mode='widthFix' src="{{item.url}}" />
+          </view>
+           <view class='blocks-tittle'>{{item.tittle}}</view>
+          <view class='blocks-desc'>{{item.description}}</view>
+        </view>
+      </block>
+    </view>
 </view>
-
-

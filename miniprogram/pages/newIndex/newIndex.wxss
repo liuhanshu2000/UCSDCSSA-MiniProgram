@@ -1,14 +1,18 @@
 /* miniprogram/pages/newIndex.wxss */
-
+pages{
+  background-color: #f0f3f6;
+}
 .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .image-container{
   display:flex;                    
-  justify-content: center;         
+  justify-content: center;  
+  margin-top: 40rpx;       
 }
 
 .image-container image { 
@@ -19,12 +23,20 @@
 
 .page-hd {
   margin-bottom: 40rpx;
+  display: flex;
+  flex-direction: column;
+  width: 690rpx;
+  margin: auto;
+    
 }
 
 .page-title {
-  height: 200rpx;
+  /* height: 200rpx; */
   font-size: 30rpx;
+  margin-bottom: 12px;
+  
 }
+
 
 .body.fw.d-flex-column {
   margin: 20rpx;
@@ -32,4 +44,44 @@
 
 .body.fw.d-flex-column>.signup-btn-container {
   margin-bottom: 30rpx;
+}
+
+.blocks {
+  position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    padding: 0 0 75px;
+}
+.blocks block{
+  padding: 30px;
+    overflow: hidden;
+}
+.blocks-item {
+    margin-bottom: 24px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 12rpx;
+    box-shadow: 0 8px 12px #ebedf0;
+}
+.blocks-image{
+  width: 100%;
+  display:flex; 
+                     
+  justify-content: center;   
+}
+.blocks-image image {
+  width: 100%;
+  border-radius: 12rpx;
+  margin-bottom: 12px;
+}
+.blocks-tittle{
+    margin-bottom: 12px;
+    font-weight: 500;
+    font-size: 17px;
+}
+.blocks-desc {
+color: #34495e;
+    font-size: 14px;
+    line-height: 26px;
 }
